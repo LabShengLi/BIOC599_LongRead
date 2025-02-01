@@ -25,6 +25,36 @@ singularity pull --dir tool/ docker://nanoporetech/dorado
 singularity pull --dir tool/ docker://hkubal/clair3
 ```
 
+#### Verify installation
+
+```
+singularity exec tool/dorado_latest.sif     dorado -vv
+```
+
+```
+singularity exec tool/clair3_latest.sif run_clair3.sh --version
+```
+
+#### Download basecall and methylation call models for Dorado
+
+```
+
+# download dorado models
+dorado_model_dir="$wdir/tool/models"
+dorado_base_model="dna_r9.4.1_e8_fast@v3.4"
+dorado_meth_model="dna_r9.4.1_e8_fast@v3.4_5mCG@v0.1"
+
+mkdir -p $dorado_model_dir
+
+singularity exec ${dorado_sif} \
+    dorado -vv
+
+singularity exec ${dorado_sif} \
+    dorado download --model ${dorado_base_model} --models-directory ${dorado_model_dir}
+
+singularity exec ${dorado_sif} \
+    dorado download --model ${dorado_meth_model} --models-directory ${dorado_model_dir}
+```
 
 
 #### Download Nanopore input files
