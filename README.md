@@ -202,6 +202,8 @@ phased_vcf_fn="${outdir}/phased_merge_output.vcf.gz"
 tsvFile="${outdir}/haplotag.tsv"
 haplotagBamFile="${outdir}/haplotag.bam"
 
+export SINGULARITY_BIND="/project,/scratch1"
+
 mkdir -p $outdir
 singularity exec tool/clair3_latest.sif \
     run_clair3.sh \
