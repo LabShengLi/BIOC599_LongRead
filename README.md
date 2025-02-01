@@ -165,3 +165,60 @@ total 2.5K
 
 ![IGV Snapshot of SNRPN](https://github.com/LabShengLi/BIOC599_LongRead/blob/tutorial/pic/igv_snapshot_SNRPN.png)
 
+## Session 3: Haplotype phasing
+
+```
+dsname="Human1"
+inbam_fn="analysis/dorado_call/calls_2025-01-31_T23-20-55.bam"
+genome="$wdir/data/hg38_chr11_chr15.fa"
+outdir="analysis/clair3_phasing"
+
+CLAIR3_MODEL_NAME="/opt/models/r941_prom_hac_g360+g422"
+
+cpus=4
+
+# intermediate files
+phased_vcf_fn="${outdir}/phased_merge_output.vcf.gz"
+tsvFile="${outdir}/haplotag.tsv"
+haplotagBamFile="${outdir}/haplotag.bam"
+
+mkdir -p $outdir
+singularity exec tool/clair3_latest.sif \
+    run_clair3.sh \
+        --sample_name=${dsname} \
+          --bam_fn=${inbam_fn} \
+          --ref_fn=${genome} \
+          --threads=${cpus} \
+          --platform="ont" \
+          --model_path="${CLAIR3_MODEL_NAME}" \
+          --enable_phasing \
+          --output=$outdir \
+          --ctg_name=chr11,chr15
+
+
+singularity exec tool/clair3_latest.sif \
+    whatshap --version
+
+singularity exec tool/clair3_latest.sif \
+    whatshap  haplotag \
+        --ignore-read-groups\
+        --reference ${genome}\
+        --output-haplotag-list ${tsvFile} \
+        -o ${haplotagBamFile} \
+        ${phased_vcf_fn}  ${inbam_fn}
+
+# Extract h1 and h2 haplotype reads
+singularity exec tool/clair3_latest.sif \
+whatshap split \
+    --output-h1 ${outdir}/${dsname}_split_HP1.bam \
+    --output-h2 ${outdir}/${dsname}_split_HP2.bam \
+    --output-untagged ${outdir}/${dsname}_split_untagged.bam  \
+    ${inbam_fn} \
+    ${tsvFile}
+
+singularity exec tool/clair3_latest.sif \
+    samtools index -@ ${cpus} ${outdir}/${dsname}_split_HP1.bam
+
+singularity exec tool/clair3_latest.sif \
+    samtools index -@ ${cpus} ${outdir}/${dsname}_split_HP2.bam
+```
