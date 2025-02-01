@@ -109,11 +109,19 @@ pwd
 
 ```
 ls data/
+```
+
+**output**
+```
 hg38_chr11_chr15.fa  hg38_chr11_chr15.fa.fai  nanopore_demo_data.pod5
 ```
 
 ```
 ls tool/
+
+```
+**output**
+```
 clair3_latest.sif  dorado_latest.sif  models
 ```
 
@@ -140,4 +148,12 @@ singularity exec tool/dorado_latest.sif \
         --reference $ref \
         --output-dir analysis/dorado_call \
         --batchsize 8
+
+ls -lh analysis/dorado_call/
+```
+**output**
+```
+total 4.5M
+-rw-rw-r-- 1 yliu8962 sli68423_1316 2.7M Jan 30 17:03 calls_2025-01-31_T00-54-24.bam
+-rw-rw-r-- 1 yliu8962 sli68423_1316  47K Jan 30 17:03 calls_2025-01-31_T00-54-24.bam.bai
 ```
