@@ -187,7 +187,7 @@ https://raw.githubusercontent.com/LabShengLi/BIOC599_LongRead/tutorial/pic/igv_s
 
 ## Session 3: Haplotype phasing
 
-Run **Clair3** for haplotype phasing:
+Run **Clair3** for haplotype phasing, firstly, run Clair3 Variant calling and Phasing:
 ```
 dsname="Human1"
 inbam_fn="analysis/dorado_call/calls_2025-01-31_T23-20-55.bam"
@@ -215,13 +215,9 @@ singularity exec tool/clair3_latest.sif \
           --enable_phasing \
           --output=$outdir \
           --ctg_name=chr11,chr15
-
-
-
-
-
 ```
 
+Next, run haplotag:
 ```
 singularity exec tool/clair3_latest.sif \
     whatshap --version
@@ -233,24 +229,6 @@ singularity exec tool/clair3_latest.sif \
         --output-haplotag-list ${tsvFile} \
         -o ${haplotagBamFile} \
         ${phased_vcf_fn}  ${inbam_fn}
-```
-
-Extract **haplotype 1 (HP1)** and **haplotype 2 (HP2)** reads from BAM:
-```
-# Extract h1 and h2 haplotype reads
-singularity exec tool/clair3_latest.sif \
-whatshap split \
-    --output-h1 ${outdir}/${dsname}_split_HP1.bam \
-    --output-h2 ${outdir}/${dsname}_split_HP2.bam \
-    --output-untagged ${outdir}/${dsname}_split_untagged.bam  \
-    ${inbam_fn} \
-    ${tsvFile}
-
-singularity exec tool/clair3_latest.sif \
-    samtools index -@ ${cpus} ${outdir}/${dsname}_split_HP1.bam
-
-singularity exec tool/clair3_latest.sif \
-    samtools index -@ ${cpus} ${outdir}/${dsname}_split_HP2.bam
 ```
 
 **output** for haplotype
@@ -265,6 +243,25 @@ Total alignments processed:                        51
 Alignments that could be tagged:                   49
 Alignments spanning multiple phase sets:            0
 Finished in 1.3 s
+```
+
+Then, extract **haplotype 1 (HP1)** and **haplotype 2 (HP2)** reads from BAM:
+```
+# Extract h1 and h2 haplotype reads
+singularity exec tool/clair3_latest.sif \
+whatshap split \
+    --output-h1 ${outdir}/${dsname}_split_HP1.bam \
+    --output-h2 ${outdir}/${dsname}_split_HP2.bam \
+    --output-untagged ${outdir}/${dsname}_split_untagged.bam  \
+    ${inbam_fn} \
+    ${tsvFile}
+
+# Index haplotype BAM files:
+singularity exec tool/clair3_latest.sif \
+    samtools index -@ ${cpus} ${outdir}/${dsname}_split_HP1.bam
+
+singularity exec tool/clair3_latest.sif \
+    samtools index -@ ${cpus} ${outdir}/${dsname}_split_HP2.bam
 ```
 
 **output** for split
