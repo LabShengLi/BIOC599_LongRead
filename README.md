@@ -127,6 +127,8 @@ dorado_model_dir="$wdir/tool/models"
 dorado_base_model="dna_r9.4.1_e8_fast@v3.4"
 dorado_meth_model="dna_r9.4.1_e8_fast@v3.4_5mCG@v0.1"
 
+export SINGULARITY_BIND="/project,/scratch1"
+
 mkdir -p analysis/dorado_call
 
 singularity exec tool/dorado_latest.sif \
