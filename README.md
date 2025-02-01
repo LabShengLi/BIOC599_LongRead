@@ -271,4 +271,7 @@ haplotag.tsv               log                        phased_merge_output.vcf.gz
 
 #### IGV visualization of haplotype phasing
 
-![IGV Snapshot of MethPhase](https://github.com/LabShengLi/BIOC599_LongRead/blob/tutorial/pic/igv_snapshot_methphase.png)
+
+https://raw.githubusercontent.com/LabShengLi/BIOC599_LongRead/tutorial/pic/igv_snapshot_methphase.png
+
+![IGV Snapshot of MethPhase](https://raw.githubusercontent.com/LabShengLi/BIOC599_LongRead/tutorial/pic/igv_snapshot_methphase.png)
