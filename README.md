@@ -267,3 +267,8 @@ full_alignment.vcf.gz.tbi  Human1_split_HP2.bam       merge_output.vcf.gz.tbi   
 haplotag.bam               Human1_split_untagged.bam  phased_merge_output.vcf.gz      run_clair3.log
 haplotag.tsv               log                        phased_merge_output.vcf.gz.tbi  tmp
 ```
+
+
+#### IGV visualization of haplotype phasing
+
+![IGV Snapshot of MethPhase](https://github.com/LabShengLi/BIOC599_LongRead/blob/tutorial/pic/igv_snapshot_methphase.png)
