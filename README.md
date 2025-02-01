@@ -80,12 +80,12 @@ ln -s /scratch1/yliu8962/shared/hg38_chr11_chr15.fa data/
 #### Inspect POD5 files
 ```
 singularity exec tool/dorado_latest.sif \
-    pod5 inspect summary ${pod_file}
+    pod5 inspect summary ${pod5_file}
 ```
 
 ```
 singularity exec tool/dorado_latest.sif \
-    pod5 inspect reads ${pod_file}
+    pod5 inspect reads ${pod5_file}
 ```
 
 ```
