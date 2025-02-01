@@ -180,10 +180,8 @@ total 2.5K
 
 #### IGV visualization of methylation states in BAM file
 
-https://raw.githubusercontent.com/LabShengLi/BIOC599_LongRead/tutorial/pic/igv_snapshot_KCNQ1.png
 ![IGV Snapshot of KCNQ1](https://raw.githubusercontent.com/LabShengLi/BIOC599_LongRead/tutorial/pic/igv_snapshot_KCNQ1.png)
 
-https://raw.githubusercontent.com/LabShengLi/BIOC599_LongRead/tutorial/pic/igv_snapshot_SNRPN.png
 ![IGV Snapshot of SNRPN](https://raw.githubusercontent.com/LabShengLi/BIOC599_LongRead/tutorial/pic/igv_snapshot_SNRPN.png)
 
 ## Session 3: Haplotype phasing
@@ -218,7 +216,7 @@ singularity exec tool/clair3_latest.sif \
           --ctg_name=chr11,chr15
 ```
 
-Next, run haplotag:
+Next, run haplotag for BAM file:
 ```
 singularity exec tool/clair3_latest.sif \
     whatshap --version
@@ -232,7 +230,7 @@ singularity exec tool/clair3_latest.sif \
         ${phased_vcf_fn}  ${inbam_fn}
 ```
 
-**output** for haplotype
+**Expected output**:
 ```
 Found 1 sample(s) in input VCF
 Found 22 sample(s) in BAM file
@@ -265,7 +263,7 @@ singularity exec tool/clair3_latest.sif \
     samtools index -@ ${cpus} ${outdir}/${dsname}_split_HP2.bam
 ```
 
-**output** for split
+**Expected output**:
 ```
 Total number of reads in haplotag list: 49
 Total number of haplo-tagged reads: 49
@@ -297,8 +295,5 @@ haplotag.tsv               log                        phased_merge_output.vcf.gz
 
 
 #### IGV visualization of haplotype phasing
-
-
-https://raw.githubusercontent.com/LabShengLi/BIOC599_LongRead/tutorial/pic/igv_snapshot_methphase.png
 
 ![IGV Snapshot of MethPhase](https://raw.githubusercontent.com/LabShengLi/BIOC599_LongRead/tutorial/pic/igv_snapshot_methphase.png)
