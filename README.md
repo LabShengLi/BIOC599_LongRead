@@ -3,6 +3,9 @@
 ## Section 1: Software Installation
 
 ### Enter into interactive mode
+
+**Note**: if you already in compute node mode, you don't need to do this step.
+
 This command starts an interactive session on the cluster with 2 CPU cores and 16GB memory for 2 hours.
 
 ```
