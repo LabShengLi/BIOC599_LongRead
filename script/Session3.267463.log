@@ -1,0 +1,453 @@
+/scratch1/yliu8962/BIOC599_LongRead
+[33m[WARNING] No absolute output path provided, using current directory as prefix[0m
+[INFO] CLAIR3 VERSION: v1.0.9
+[INFO] BAM FILE PATH: /scratch1/yliu8962/BIOC599_LongRead/analysis/dorado_call/calls_2025-02-01_T16-36-12.bam
+[INFO] REFERENCE FILE PATH: /scratch1/yliu8962/BIOC599_LongRead/data/hg38_chr11_chr15.fa
+[INFO] MODEL PATH: /opt/models/r941_prom_hac_g360+g422
+[INFO] OUTPUT FOLDER: /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing
+[INFO] PLATFORM: ont
+[INFO] THREADS: 4
+[INFO] BED FILE PATH: EMPTY
+[INFO] VCF FILE PATH: EMPTY
+[INFO] CONTIGS: chr11,chr15
+[INFO] CONDA PREFIX: /project/sli68423_1316/users/yang/conda/envs/nano
+[INFO] SAMTOOLS PATH: samtools
+[INFO] PYTHON PATH: python3
+[INFO] PYPY PATH: pypy3
+[INFO] PARALLEL PATH: parallel
+[INFO] WHATSHAP PATH: whatshap
+[INFO] LONGPHASE PATH: EMPTY
+[INFO] CHUNK SIZE: 5000000
+[INFO] FULL ALIGN PROPORTION: 0.7
+[INFO] FULL ALIGN REFERENCE PROPORTION: 0.1
+[INFO] PHASING PROPORTION: 0.7
+[INFO] MINIMUM MQ: 5
+[INFO] MINIMUM COVERAGE: 2
+[INFO] SNP AF THRESHOLD: 0.08
+[INFO] INDEL AF THRESHOLD: 0.15
+[INFO] BASE ERROR IN GVCF: 0.001
+[INFO] GQ BIN SIZE IN GVCF: 5
+[INFO] ENABLE FILEUP ONLY CALLING: False
+[INFO] ENABLE FAST MODE CALLING: False
+[INFO] ENABLE CALLING SNP CANDIDATES ONLY: False
+[INFO] ENABLE PRINTING REFERENCE CALLS: False
+[INFO] ENABLE OUTPUT GVCF: False
+[INFO] ENABLE HAPLOID PRECISE MODE: False
+[INFO] ENABLE HAPLOID SENSITIVE MODE: False
+[INFO] ENABLE INCLUDE ALL CTGS CALLING: False
+[INFO] ENABLE NO PHASING FOR FULL ALIGNMENT: False
+[INFO] ENABLE REMOVING INTERMEDIATE FILES: False
+[INFO] ENABLE LONGPHASE FOR INTERMEDIATE VCF PHASING: False
+[INFO] ENABLE PHASING FINAL VCF OUTPUT USING WHATSHAP: True
+[INFO] ENABLE PHASING FINAL VCF OUTPUT USING LONGPHASE: False
+[INFO] ENABLE HAPLOTAGGING FINAL BAM: False
+[INFO] ENABLE LONG INDEL CALLING: False
+[INFO] ENABLE C_IMPLEMENT: True
+
++ /opt/bin/scripts/clair3_c_impl.sh --bam_fn /scratch1/yliu8962/BIOC599_LongRead/analysis/dorado_call/calls_2025-02-01_T16-36-12.bam --ref_fn /scratch1/yliu8962/BIOC599_LongRead/data/hg38_chr11_chr15.fa --threads 4 --model_path /opt/models/r941_prom_hac_g360+g422 --platform ont --output /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing --bed_fn=EMPTY --vcf_fn=EMPTY --ctg_name=chr11,chr15 --sample_name=Human1 --chunk_num=0 --chunk_size=5000000 --samtools=samtools --python=python3 --pypy=pypy3 --parallel=parallel --whatshap=whatshap --qual=2 --var_pct_full=0.7 --ref_pct_full=0.1 --var_pct_phasing=0.7 --snp_min_af=0.08 --indel_min_af=0.15 --min_mq=5 --min_coverage=2 --min_contig_size=0 --pileup_only=False --gvcf=False --base_err=0.001 --gq_bin_size=5 --fast_mode=False --call_snp_only=False --print_ref_calls=False --haploid_precise=False --haploid_sensitive=False --include_all_ctgs=False --no_phasing_for_fa=False --pileup_model_prefix=pileup --fa_model_prefix=full_alignment --remove_intermediate_dir=False --enable_phasing=True --enable_long_indel=False --keep_iupac_bases=False --use_gpu=False --longphase_for_phasing=False --longphase=EMPTY --use_whatshap_for_intermediate_phasing=True --use_longphase_for_intermediate_phasing=False --use_whatshap_for_final_output_phasing=True --use_longphase_for_final_output_phasing=False --use_whatshap_for_final_output_haplotagging=False
+
+[INFO] Check environment variables
+[INFO] Create folder /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/log
+[INFO] Create folder /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output
+[INFO] Create folder /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/merge_output
+[INFO] Create folder /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/phase_output
+[INFO] Create folder /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/gvcf_tmp_output
+[INFO] Create folder /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/full_alignment_output
+[INFO] Create folder /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/phase_output/phase_vcf
+[INFO] Create folder /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/phase_output/phase_bam
+[INFO] Create folder /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/full_alignment_output/candidate_bed
+[INFO] Call variant in contigs: chr11 chr15
+[INFO] Chunk number for each contig: 28 21
+[INFO] 1/7 Call variants using pileup model
+Calling variants ...
+Total processed positions in chr11 (chunk 2/28) : 0
+Total time elapsed: 0.34 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_2.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 3/28) : 0
+Total time elapsed: 0.27 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_3.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 4/28) : 0
+Total time elapsed: 0.09 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_4.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 5/28) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_5.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 6/28) : 0
+Total time elapsed: 0.09 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_6.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 7/28) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_7.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 8/28) : 0
+Total time elapsed: 0.09 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_8.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 9/28) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_9.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 11/28) : 0
+Total time elapsed: 0.10 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_11.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 10/28) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_10.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 12/28) : 0
+Total time elapsed: 0.09 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_12.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 13/28) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_13.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 14/28) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_14.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 15/28) : 0
+Total time elapsed: 0.09 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_15.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 16/28) : 0
+Total time elapsed: 0.09 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_16.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 17/28) : 0
+Total time elapsed: 0.11 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_17.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 18/28) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_18.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 19/28) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_19.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 20/28) : 0
+Total time elapsed: 0.09 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_20.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 21/28) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_21.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 22/28) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_22.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 23/28) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_23.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 24/28) : 0
+Total time elapsed: 0.09 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_24.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 25/28) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_25.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 26/28) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_26.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 27/28) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_27.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 28/28) : 0
+Total time elapsed: 0.09 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr11_28.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr15 (chunk 1/21) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr15_1.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr15 (chunk 2/21) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr15_2.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr15 (chunk 3/21) : 0
+Total time elapsed: 0.07 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr15_3.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr15 (chunk 4/21) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr15_4.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr15 (chunk 5/21) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr15_5.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr15 (chunk 7/21) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr15_7.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr15 (chunk 8/21) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr15_8.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr15 (chunk 9/21) : 0
+Total time elapsed: 0.09 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr15_9.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr15 (chunk 10/21) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr15_10.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr11 (chunk 1/28) : 22578
+Total time elapsed: 47.20 s
+Calling variants ...
+Total processed positions in chr15 (chunk 11/21) : 0
+Total time elapsed: 0.09 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr15_11.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr15 (chunk 12/21) : 0
+Total time elapsed: 0.09 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr15_12.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr15 (chunk 13/21) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr15_13.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr15 (chunk 14/21) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr15_14.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr15 (chunk 15/21) : 0
+Total time elapsed: 0.09 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr15_15.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr15 (chunk 16/21) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr15_16.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr15 (chunk 17/21) : 0
+Total time elapsed: 0.09 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr15_17.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr15 (chunk 18/21) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr15_18.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr15 (chunk 19/21) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr15_19.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr15 (chunk 20/21) : 0
+Total time elapsed: 0.08 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr15_20.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr15 (chunk 21/21) : 0
+Total time elapsed: 0.09 s
+[INFO] No vcf output for file /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/tmp/pileup_output/pileup_chr15_21.vcf, remove empty file
+Calling variants ...
+Total processed positions in chr15 (chunk 6/21) : 14748
+Total time elapsed: 30.89 s
+
+real	1m16.597s
+user	2m54.732s
+sys	0m19.853s
+
+[INFO] 2/7 Select heterozygous SNP variants for Whatshap phasing and haplotagging
+[INFO] Select heterozygous pileup variants exceeding phasing quality cutoff 7
+[INFO] Total heterozygous SNP positions selected: chr15: 73
+[INFO] Total heterozygous SNP positions selected: chr11: 127
+
+real	0m0.377s
+user	0m0.460s
+sys	0m0.150s
+
+[INFO] 3/7 Phase VCF file using Whatshap
+This is WhatsHap 1.7 running under Python 3.9.0
+Working on 1 sample from 1 family
+
+# Working on contig chr15 in individual Human1
+Found 73 usable heterozygous variants (0 skipped due to missing genotypes)
+Found 21 reads covering 73 variants
+Kept 21 reads that cover at least two variants each
+Selected 16 most phase-informative reads covering 73 variants
+Phasing 1 sample by solving the MEC problem ...
+Largest block contains 56 variants (76.7% of accessible variants) between position 24907840 and 24996749
+Changed 1 genotypes while writing VCF
+
+# Resource usage
+Maximum memory usage: 0.242 GB
+Time spent reading BAM/CRAM:                    0.4 s
+Time spent parsing VCF:                         0.0 s
+Time spent selecting reads:                     0.0 s
+Time spent phasing:                             0.1 s
+Time spent writing VCF:                         0.0 s
+Time spent finding components:                  0.0 s
+Time spent on rest:                             0.0 s
+Total elapsed time:                             0.5 s
+This is WhatsHap 1.7 running under Python 3.9.0
+Working on 1 sample from 1 family
+
+# Working on contig chr11 in individual Human1
+Found 127 usable heterozygous variants (0 skipped due to missing genotypes)
+Found 28 reads covering 127 variants
+Kept 28 reads that cover at least two variants each
+Selected 15 most phase-informative reads covering 127 variants
+Phasing 1 sample by solving the MEC problem ...
+Largest block contains 121 variants (95.3% of accessible variants) between position 2631701 and 2780560
+Changed 1 genotypes while writing VCF
+
+# Resource usage
+Maximum memory usage: 0.307 GB
+Time spent reading BAM/CRAM:                    0.6 s
+Time spent parsing VCF:                         0.0 s
+Time spent selecting reads:                     0.0 s
+Time spent phasing:                             0.1 s
+Time spent writing VCF:                         0.0 s
+Time spent finding components:                  0.0 s
+Time spent on rest:                             0.1 s
+Total elapsed time:                             0.8 s
+
+real	0m1.404s
+user	0m1.556s
+sys	0m0.572s
+
+[INFO] 5/7 Select candidates for full-alignment calling
+[INFO] Set variants quality cutoff 11.0
+[INFO] Set reference calls quality cutoff 12.0
+[INFO] Low quality reference calls to be processed in chr15: 1876
+[INFO] Low quality variants to be processed in chr15: 262
+[INFO] Low quality reference calls to be processed in chr11: 1795
+[INFO] Low quality variants to be processed in chr11: 153
+
+real	0m0.383s
+user	0m0.487s
+sys	0m0.132s
+
+[INFO] 6/7 Call low-quality variants using full-alignment model
+Calling variants ...
+Total processed positions in chr11 (chunk 1/1) : 1948
+Total time elapsed: 26.53 s
+Calling variants ...
+Total processed positions in chr15 (chunk 1/1) : 2138
+Total time elapsed: 29.02 s
+
+real	0m31.458s
+user	0m57.016s
+sys	0m2.444s
+
+[INFO] 7/7 Merge pileup VCF and full-alignment VCF
+[INFO] Pileup variants processed in chr15: 69
+[INFO] Full-alignment variants processed in chr15: 157
+[INFO] Pileup variants processed in chr11: 111
+[INFO] Full-alignment variants processed in chr11: 83
+
+real	0m0.477s
+user	0m0.691s
+sys	0m0.201s
+[INFO] 7/7 Phasing VCF output in parallel using WhatsHap
+This is WhatsHap 1.7 running under Python 3.9.0
+Working on 1 sample from 1 family
+
+# Working on contig chr15 in individual Human1
+Found 96 usable heterozygous variants (0 skipped due to missing genotypes)
+Found 21 reads covering 96 variants
+Kept 21 reads that cover at least two variants each
+Selected 16 most phase-informative reads covering 96 variants
+Best-case phasing would result in 1 non-singleton phased block (0 singletons). 
+Phasing 1 sample by solving the MEC problem ...
+Largest block contains 96 variants (100.0% of accessible variants) between position 24864541 and 24974365
+
+# Resource usage
+Maximum memory usage: 0.241 GB
+Time spent reading BAM/CRAM:                    0.4 s
+Time spent parsing VCF:                         0.0 s
+Time spent selecting reads:                     0.0 s
+Time spent phasing:                             0.1 s
+Time spent writing VCF:                         0.0 s
+Time spent finding components:                  0.0 s
+Time spent on rest:                             0.0 s
+Total elapsed time:                             0.5 s
+This is WhatsHap 1.7 running under Python 3.9.0
+Working on 1 sample from 1 family
+
+# Working on contig chr11 in individual Human1
+Found 115 usable heterozygous variants (0 skipped due to missing genotypes)
+Found 28 reads covering 115 variants
+Kept 28 reads that cover at least two variants each
+Selected 15 most phase-informative reads covering 115 variants
+Best-case phasing would result in 1 non-singleton phased block (0 singletons). 
+Phasing 1 sample by solving the MEC problem ...
+Largest block contains 115 variants (100.0% of accessible variants) between position 2635341 and 2778457
+
+# Resource usage
+Maximum memory usage: 0.307 GB
+Time spent reading BAM/CRAM:                    0.6 s
+Time spent parsing VCF:                         0.0 s
+Time spent selecting reads:                     0.0 s
+Time spent phasing:                             0.1 s
+Time spent writing VCF:                         0.0 s
+Time spent finding components:                  0.0 s
+Time spent on rest:                             0.0 s
+Total elapsed time:                             0.7 s
+
+real	0m1.194s
+user	0m1.548s
+sys	0m0.458s
+
+[INFO] Finish calling, output file: /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/merge_output.vcf.gz
+[INFO] Finish calling, phased output file: /scratch1/yliu8962/BIOC599_LongRead/analysis/clair3_phasing/phased_merge_output.vcf.gz
+
+real	1m56.615s
+user	3m58.252s
+sys	0m25.347s
+1.7
+Found 1 sample(s) in input VCF
+Found 22 sample(s) in BAM file
+Found 28 reads covering 114 variants
+Found 21 reads covering 95 variants
+
+== SUMMARY ==
+Total alignments processed:                        51
+Alignments that could be tagged:                   49
+Alignments spanning multiple phase sets:            0
+Finished in 1.1 s
+Total number of reads in haplotag list: 49
+Total number of haplo-tagged reads: 49
+Total number of untagged reads: 0
+
+== SUMMARY ==
+Total reads processed: 51
+Number of output reads "untagged": 0
+Number of output reads haplotype 1: 29
+Number of output reads haplotype 2: 22
+Number of unknown (dropped) reads: 0
+Number of skipped reads (per user request): 0
+Time for processing haplotag list: 0.0 sec
+Time for total initial setup: 0.012 sec
+Time for iterating input reads: 0.137 sec
+Total run time: 0.188 sec
+full_alignment.vcf.gz
+full_alignment.vcf.gz.tbi
+haplotag.bam
+haplotag.tsv
+Human1_split_HP1.bam
+Human1_split_HP1.bam.bai
+Human1_split_HP2.bam
+Human1_split_HP2.bam.bai
+Human1_split_untagged.bam
+log
+merge_output.vcf.gz
+merge_output.vcf.gz.tbi
+phased_merge_output.vcf.gz
+phased_merge_output.vcf.gz.tbi
+pileup.vcf.gz
+pileup.vcf.gz.tbi
+run_clair3.log
+tmp
+### Session3 Done

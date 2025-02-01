@@ -1,0 +1,13 @@
+/scratch1/yliu8962/BIOC599_LongRead
+hg38_chr11_chr15.fa
+hg38_chr11_chr15.fa.fai
+nanopore_demo_data.pod5
+clair3_latest.sif
+dorado_latest.sif
+models
+total 2.7M
+-rw-rw-r-- 1 yliu8962 yliu8962 2.7M Jan 31 23:12 calls_2025-02-01_T07-01-17.bam
+-rw-rw-r-- 1 yliu8962 yliu8962  47K Jan 31 23:12 calls_2025-02-01_T07-01-17.bam.bai
+-rw-rw-r-- 1 yliu8962 yliu8962 2.7M Feb  1 08:39 calls_2025-02-01_T16-36-12.bam
+-rw-rw-r-- 1 yliu8962 yliu8962  47K Feb  1 08:39 calls_2025-02-01_T16-36-12.bam.bai
+### Session2 Done
