@@ -222,3 +222,48 @@ singularity exec tool/clair3_latest.sif \
 singularity exec tool/clair3_latest.sif \
     samtools index -@ ${cpus} ${outdir}/${dsname}_split_HP2.bam
 ```
+
+
+**output** for haplotype
+```
+Found 1 sample(s) in input VCF
+Found 22 sample(s) in BAM file
+Found 28 reads covering 114 variants
+Found 21 reads covering 95 variants
+
+== SUMMARY ==
+Total alignments processed:                        51
+Alignments that could be tagged:                   49
+Alignments spanning multiple phase sets:            0
+Finished in 1.3 s
+```
+
+**output** for split
+```
+Total number of reads in haplotag list: 49
+Total number of haplo-tagged reads: 49
+Total number of untagged reads: 0
+
+== SUMMARY ==
+Total reads processed: 51
+Number of output reads "untagged": 0
+Number of output reads haplotype 1: 29
+Number of output reads haplotype 2: 22
+Number of unknown (dropped) reads: 0
+Number of skipped reads (per user request): 0
+Time for processing haplotag list: 0.0 sec
+Time for total initial setup: 0.054 sec
+Time for iterating input reads: 0.136 sec
+Total run time: 0.363 sec
+```
+
+```
+ls analysis/clair3_phasing/
+```
+**output**
+```
+full_alignment.vcf.gz      Human1_split_HP1.bam       merge_output.vcf.gz             pileup.vcf.gz
+full_alignment.vcf.gz.tbi  Human1_split_HP2.bam       merge_output.vcf.gz.tbi         pileup.vcf.gz.tbi
+haplotag.bam               Human1_split_untagged.bam  phased_merge_output.vcf.gz      run_clair3.log
+haplotag.tsv               log                        phased_merge_output.vcf.gz.tbi  tmp
+```
