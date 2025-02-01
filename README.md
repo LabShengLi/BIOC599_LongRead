@@ -103,7 +103,7 @@ singularity exec tool/dorado_latest.sif \
 Inspect specific read details:
 ```
 singularity exec tool/dorado_latest.sif \
-    pod5 inspect read ${pod_file}  f84e44c5-15d2-4227-adb7-fb1b206dc128
+    pod5 inspect read ${pod5_file}  f84e44c5-15d2-4227-adb7-fb1b206dc128
 ```
 
 
