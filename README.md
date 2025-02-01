@@ -161,9 +161,11 @@ total 2.5K
 
 #### IGV visualization of methylation states in BAM file
 
-![IGV Snapshot of KCNQ1](https://github.com/LabShengLi/BIOC599_LongRead/blob/tutorial/pic/igv_snapshot_KCNQ1.png)
+https://raw.githubusercontent.com/LabShengLi/BIOC599_LongRead/tutorial/pic/igv_snapshot_KCNQ1.png
+![IGV Snapshot of KCNQ1](https://raw.githubusercontent.com/LabShengLi/BIOC599_LongRead/tutorial/pic/igv_snapshot_KCNQ1.png)
 
-![IGV Snapshot of SNRPN](https://github.com/LabShengLi/BIOC599_LongRead/blob/tutorial/pic/igv_snapshot_SNRPN.png)
+https://raw.githubusercontent.com/LabShengLi/BIOC599_LongRead/tutorial/pic/igv_snapshot_SNRPN.png
+![IGV Snapshot of SNRPN](https://raw.githubusercontent.com/LabShengLi/BIOC599_LongRead/tutorial/pic/igv_snapshot_SNRPN.png)
 
 ## Session 3: Haplotype phasing
 
