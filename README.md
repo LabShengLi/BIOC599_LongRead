@@ -60,13 +60,15 @@ singularity exec tool/dorado_latest.sif \
 ```
 mkdir -p data
 
+# download nanopore input file
 online_pod5_file='https://drive.google.com/uc?export=download&id=1fhAYa0uwGnbmeg4vEcFRhmbTxZT4whKG'
 pod5_file="data/nanopore_demo_data.pod5"
+
 wget --no-check-certificate ${online_pod5_file}  -O ${pod5_file}
 
-online_genome_index_file='https://drive.google.com/uc?export=download&id=1HnEX-h5faZJufD1IpROraGq80x9bkAlU'
-genome_index_file="data/hg38_chr11_chr15.fa.fai"
-wget --no-check-certificate ${online_genome_file}  -O ${genome_index_file}
+# load genome reference
+ln -s /scratch1/yliu8962/shared/hg38_chr11_chr15.fa.fai data/
+ln -s /scratch1/yliu8962/shared/hg38_chr11_chr15.fa data/
 ```
 
 #### Inspect POD5 files
