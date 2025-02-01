@@ -92,3 +92,50 @@ singularity exec tool/dorado_latest.sif \
 singularity exec tool/dorado_latest.sif \
     pod5 inspect read ${pod_file}  f84e44c5-15d2-4227-adb7-fb1b206dc128
 ```
+
+
+
+## Session 2: Long read basecall and methylation call
+
+### Dorado basecall and methylation call
+#### Prerequisite files
+
+```
+wdir="/scratch1/$USER/BIOC599_LongRead"
+mkdir -p $wdir
+cd $wdir
+pwd
+```
+
+```
+ls data/
+hg38_chr11_chr15.fa  hg38_chr11_chr15.fa.fai  nanopore_demo_data.pod5
+```
+
+```
+ls tool/
+clair3_latest.sif  dorado_latest.sif  models
+```
+
+#### Basecall and methylation call
+
+```
+indir="$wdir/data/nanopore_demo_data.pod5"
+ref="$wdir/data/hg38_chr11_chr15.fa"
+
+dorado_model_dir="$wdir/tool/models"
+dorado_base_model="dna_r9.4.1_e8_fast@v3.4"
+dorado_meth_model="dna_r9.4.1_e8_fast@v3.4_5mCG@v0.1"
+
+mkdir -p analysis/dorado_call
+
+singularity exec tool/dorado_latest.sif \
+    dorado basecaller \
+        ${dorado_model_dir}/$dorado_base_model \
+        $indir/ \
+        --modified-bases-models ${dorado_model_dir}/${dorado_meth_model} \
+        -x auto --verbose \
+        --reference $ref \
+        --output-dir analysis/dorado_call \
+        --batchsize 8
+```
