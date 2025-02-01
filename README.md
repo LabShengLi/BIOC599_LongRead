@@ -24,3 +24,11 @@ singularity pull --dir tool/ docker://nanoporetech/dorado
 # singularity pull docker://hkubal/clair3
 singularity pull --dir tool/ docker://hkubal/clair3
 ```
+
+
+
+#### Download Nanopore input files
+```
+wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1fhAYa0uwGnbmeg4vEcFRhmbTxZT4whKG' -O myfile
+
+```
