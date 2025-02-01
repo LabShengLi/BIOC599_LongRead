@@ -1,5 +1,11 @@
 # BIOC599 Functional Genomics and Data Science Course
 ## Section 1: Software Installation
+
+### Enter into interactive mode
+```
+srun --pty -p main --time=02:00:00 -n 2 --mem 16GB bash
+```
+
 ### Installation of long read Nanopore sequencing analysis tools
 
 We will install tools using Conda and Singularity. Firstly, create a folder for tool installation:
