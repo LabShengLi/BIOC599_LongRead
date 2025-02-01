@@ -2,6 +2,8 @@
 ## Section 1: Software Installation
 
 ### Enter into interactive mode
+This command starts an interactive session on the cluster with 2 CPU cores and 16GB memory for 2 hours.
+
 ```
 srun --pty -p main --time=02:00:00 -n 2 --mem 16GB bash
 ```
@@ -17,6 +19,7 @@ pwd
 ```
 
 #### Basecall and Methylation call tool: Dorado
+Download the **Dorado** container from DockerHub using Singularity.
 
 ```
 mkdir -p tool
@@ -25,6 +28,7 @@ singularity pull --dir tool/ docker://nanoporetech/dorado
 ```
 
 #### Genetic Variant Call tool: Clair3
+Download the **Clair3** container for variant calling.
 
 ```
 # singularity pull docker://hkubal/clair3
@@ -32,17 +36,20 @@ singularity pull --dir tool/ docker://hkubal/clair3
 ```
 
 #### Verify installation
+Run these commands to check if the installed tools are working correctly.
 
+Verify Dorado:
 ```
 singularity exec tool/dorado_latest.sif     dorado -vv
 ```
 
+Verify Clair3:
 ```
 singularity exec tool/clair3_latest.sif run_clair3.sh --version
 ```
 
 #### Download basecall and methylation call models for Dorado
-
+Download necessary models for **basecalling** and **methylation detection**.
 ```
 # download dorado models
 dorado_model_dir="$wdir/tool/models"
@@ -63,6 +70,8 @@ singularity exec tool/dorado_latest.sif \
 
 
 #### Download Nanopore input files
+
+Download a **POD5 format** demo dataset and link genome reference files.
 ```
 mkdir -p data
 
@@ -78,16 +87,20 @@ ln -s /scratch1/yliu8962/shared/hg38_chr11_chr15.fa data/
 ```
 
 #### Inspect POD5 files
+
+Check the summary of the **POD5** file:
 ```
 singularity exec tool/dorado_latest.sif \
     pod5 inspect summary ${pod5_file}
 ```
 
+Check read-level details:
 ```
 singularity exec tool/dorado_latest.sif \
     pod5 inspect reads ${pod5_file}
 ```
 
+Inspect specific read details:
 ```
 singularity exec tool/dorado_latest.sif \
     pod5 inspect read ${pod_file}  f84e44c5-15d2-4227-adb7-fb1b206dc128
@@ -100,6 +113,7 @@ singularity exec tool/dorado_latest.sif \
 ### Dorado basecall and methylation call
 #### Prerequisite files
 
+Navigate to the working directory:
 ```
 wdir="/scratch1/$USER/BIOC599_LongRead"
 mkdir -p $wdir
@@ -107,26 +121,29 @@ cd $wdir
 pwd
 ```
 
+Check if required files are available:
 ```
 ls data/
 ```
 
-**output**
+**Expected output**
 ```
 hg38_chr11_chr15.fa  hg38_chr11_chr15.fa.fai  nanopore_demo_data.pod5
 ```
 
+Verify installed tools:
 ```
 ls tool/
 
 ```
-**output**
+**Expected output**
 ```
 clair3_latest.sif  dorado_latest.sif  models
 ```
 
 #### Basecall and methylation call
 
+Run **Dorado** to process the input data:
 ```
 indir="$wdir/data/"
 genome="$wdir/data/hg38_chr11_chr15.fa"
@@ -151,7 +168,8 @@ singularity exec tool/dorado_latest.sif \
 
 ls -lh analysis/dorado_call/
 ```
-**output**
+
+**Expected output**
 ```
 total 2.5K
 -rw-rw-r-- 1 yliu8962 yliu8962 2.7M Jan 31 23:12 calls_2025-02-01_T07-01-17.bam
@@ -169,6 +187,7 @@ https://raw.githubusercontent.com/LabShengLi/BIOC599_LongRead/tutorial/pic/igv_s
 
 ## Session 3: Haplotype phasing
 
+Run **Clair3** for haplotype phasing:
 ```
 dsname="Human1"
 inbam_fn="analysis/dorado_call/calls_2025-01-31_T23-20-55.bam"
@@ -198,6 +217,12 @@ singularity exec tool/clair3_latest.sif \
           --ctg_name=chr11,chr15
 
 
+
+
+
+```
+
+```
 singularity exec tool/clair3_latest.sif \
     whatshap --version
 
@@ -208,7 +233,10 @@ singularity exec tool/clair3_latest.sif \
         --output-haplotag-list ${tsvFile} \
         -o ${haplotagBamFile} \
         ${phased_vcf_fn}  ${inbam_fn}
+```
 
+Extract **haplotype 1 (HP1)** and **haplotype 2 (HP2)** reads from BAM:
+```
 # Extract h1 and h2 haplotype reads
 singularity exec tool/clair3_latest.sif \
 whatshap split \
@@ -224,7 +252,6 @@ singularity exec tool/clair3_latest.sif \
 singularity exec tool/clair3_latest.sif \
     samtools index -@ ${cpus} ${outdir}/${dsname}_split_HP2.bam
 ```
-
 
 **output** for haplotype
 ```
