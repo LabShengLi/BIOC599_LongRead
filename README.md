@@ -153,12 +153,15 @@ ls -lh analysis/dorado_call/
 ```
 **output**
 ```
-total 4.5M
--rw-rw-r-- 1 yliu8962 sli68423_1316 2.7M Jan 30 17:03 calls_2025-01-31_T00-54-24.bam
--rw-rw-r-- 1 yliu8962 sli68423_1316  47K Jan 30 17:03 calls_2025-01-31_T00-54-24.bam.bai
+total 2.5K
+-rw-rw-r-- 1 yliu8962 yliu8962 2.7M Jan 31 23:12 calls_2025-02-01_T07-01-17.bam
+-rw-rw-r-- 1 yliu8962 yliu8962  47K Jan 31 23:12 calls_2025-02-01_T07-01-17.bam.bai
 ```
 
 
 #### IGV visualization of methylation states in BAM file
 
+![IGV Snapshot of KCNQ1](https://github.com/LabShengLi/BIOC599_LongRead/blob/tutorial/pic/igv_snapshot_KCNQ1.png)
+
+![IGV Snapshot of SNRPN](https://github.com/LabShengLi/BIOC599_LongRead/blob/tutorial/pic/igv_snapshot_SNRPN.png)
 
