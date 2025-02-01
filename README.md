@@ -1,4 +1,5 @@
-# BIOC599 Functional Genomics and Data Science Course
+# Long read sequencing analysis pipeline
+
 ## Section 1: Software Installation
 
 ### Enter into interactive mode
