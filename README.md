@@ -38,7 +38,6 @@ singularity exec tool/clair3_latest.sif run_clair3.sh --version
 #### Download basecall and methylation call models for Dorado
 
 ```
-
 # download dorado models
 dorado_model_dir="$wdir/tool/models"
 dorado_base_model="dna_r9.4.1_e8_fast@v3.4"
@@ -59,6 +58,6 @@ singularity exec ${dorado_sif} \
 
 #### Download Nanopore input files
 ```
-wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1fhAYa0uwGnbmeg4vEcFRhmbTxZT4whKG' -O myfile
-
+mkdir -p data
+wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1fhAYa0uwGnbmeg4vEcFRhmbTxZT4whKG' -O data/nanopore_demo_data.pod5
 ```
