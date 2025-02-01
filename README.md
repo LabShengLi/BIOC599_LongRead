@@ -27,7 +27,6 @@ Download the **Dorado** container from DockerHub using Singularity.
 
 ```
 mkdir -p tool
-# singluarity pull docker://nanoporetech/dorado
 singularity pull --dir tool/ docker://nanoporetech/dorado
 ```
 
@@ -35,7 +34,6 @@ singularity pull --dir tool/ docker://nanoporetech/dorado
 Download the **Clair3** container for variant calling.
 
 ```
-# singularity pull docker://hkubal/clair3
 singularity pull --dir tool/ docker://hkubal/clair3
 ```
 
@@ -92,7 +90,7 @@ ln -s /scratch1/yliu8962/shared/hg38_chr11_chr15.fa data/
 
 #### Inspect POD5 files
 
-Check the summary of the **POD5** file:
+Check the summary of the **POD5** format Nanopore input file:
 ```
 singularity exec tool/dorado_latest.sif \
     pod5 inspect summary ${pod5_file}
@@ -290,7 +288,7 @@ Total run time: 0.363 sec
 ```
 ls analysis/clair3_phasing/
 ```
-**output**
+**Expected output**
 ```
 full_alignment.vcf.gz      Human1_split_HP1.bam       merge_output.vcf.gz             pileup.vcf.gz
 full_alignment.vcf.gz.tbi  Human1_split_HP2.bam       merge_output.vcf.gz.tbi         pileup.vcf.gz.tbi
