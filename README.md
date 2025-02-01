@@ -129,7 +129,7 @@ clair3_latest.sif  dorado_latest.sif  models
 
 ```
 indir="$wdir/data/"
-ref="$wdir/data/hg38_chr11_chr15.fa"
+genome="$wdir/data/hg38_chr11_chr15.fa"
 
 dorado_model_dir="$wdir/tool/models"
 dorado_base_model="dna_r9.4.1_e8_fast@v3.4"
@@ -145,7 +145,7 @@ singularity exec tool/dorado_latest.sif \
         $indir/ \
         --modified-bases-models ${dorado_model_dir}/${dorado_meth_model} \
         -x auto --verbose \
-        --reference $ref \
+        --reference $genome \
         --output-dir analysis/dorado_call \
         --batchsize 8
 
