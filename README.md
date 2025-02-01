@@ -120,7 +120,7 @@ clair3_latest.sif  dorado_latest.sif  models
 #### Basecall and methylation call
 
 ```
-indir="$wdir/data/nanopore_demo_data.pod5"
+indir="$wdir/data/"
 ref="$wdir/data/hg38_chr11_chr15.fa"
 
 dorado_model_dir="$wdir/tool/models"
