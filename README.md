@@ -45,13 +45,13 @@ dorado_meth_model="dna_r9.4.1_e8_fast@v3.4_5mCG@v0.1"
 
 mkdir -p $dorado_model_dir
 
-singularity exec ${dorado_sif} \
+singularity exec tool/dorado_latest.sif \
     dorado -vv
 
-singularity exec ${dorado_sif} \
+singularity exec tool/dorado_latest.sif \
     dorado download --model ${dorado_base_model} --models-directory ${dorado_model_dir}
 
-singularity exec ${dorado_sif} \
+singularity exec tool/dorado_latest.sif \
     dorado download --model ${dorado_meth_model} --models-directory ${dorado_model_dir}
 ```
 
@@ -59,5 +59,19 @@ singularity exec ${dorado_sif} \
 #### Download Nanopore input files
 ```
 mkdir -p data
-wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1fhAYa0uwGnbmeg4vEcFRhmbTxZT4whKG' -O data/nanopore_demo_data.pod5
+
+online_file='https://drive.google.com/uc?export=download&id=1fhAYa0uwGnbmeg4vEcFRhmbTxZT4whKG'
+pod_file="data/nanopore_demo_data.pod5"
+wget --no-check-certificate ${online_file}  -O ${pod_file}
+```
+
+#### Inspect POD5 files
+```
+singularity exec tool/dorado_latest.sif \
+    pod5 inspect summary ${pod_file}
+```
+
+```
+singularity exec tool/dorado_latest.sif \
+    pod5 inspect reads ${pod_file}
 ```
