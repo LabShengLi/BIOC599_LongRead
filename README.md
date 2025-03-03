@@ -6,11 +6,172 @@
 
 **Note**: if you already in compute node mode, you don't need to do this step.
 
-This command starts an interactive session on the cluster with 2 CPU cores and 16GB memory for 2 hours.
+This command starts an interactive session on the cluster with 2 CPU cores and 16GB memory for 2 hours. More information check [documents](https://www.carc.usc.edu/user-guides/hpc-systems/using-our-hpc-systems/slurm-templates.html) in CARC HPC.
 
 ```
 srun --pty -p main --time=02:00:00 -n 2 --mem 16GB bash
 ```
+---
+### Install nextflow
+Nextflow is a workflow management system that enables scalable and reproducible scientific workflows. Before installing Nextflow, make sure Java is installed on your system.
+
+
+#### Install Java and Nextflow
+
+Nextflow requires Java 8 or higher. You can install it using the following commands, from [documents](https://www.carc.usc.edu/user-guides/advanced-hpc-programming/programming-languages/java.html) in CARC HPC:
+```angular2html
+module avail jdk
+
+module load openjdk/21.0.0_35
+```
+
+[Nextflow](https://www.nextflow.io/docs/latest/install.html#install-nextflow) can be installed with a single command:
+```
+curl -s https://get.nextflow.io | bash
+```
+
+Verify installation:
+```angular2html
+./nextflow  -v
+```
+
+#### Run Nextflow pipeline for RNAseq analysis 
+
+RNA sequencing (RNA-seq) is a powerful technique used to analyze the transcriptome of a biological sample. It helps researchers understand gene expression levels, identify differentially expressed genes, detect novel transcripts, and study alternative splicing events.  
+
+Processing RNA-seq data typically involves multiple complex steps, such as:
+- **Quality control** of raw sequencing reads
+- **Read alignment** to a reference genome
+- **Quantification** of gene or transcript expression levels
+- **Normalization and differential expression analysis**
+- **Generation of reports and visualizations**
+
+Manually running each of these steps requires careful coordination of tools, reference data, and settings, which can be time-consuming and error-prone.
+
+#### Why use Nextflow for RNA-seq analysis?  
+Nextflow simplifies and automates complex bioinformatics workflows, ensuring:
+- **Reproducibility**: Same pipeline can run on different systems (local, cluster, cloud).
+- **Scalability**: Easily handles large datasets and parallelizes tasks.
+- **Portability**: Supports environments like Docker, Singularity, and Conda for consistent software management.
+
+A popular, community-curated RNA-seq workflow is available through [nf-core](https://nf-co.re/), a collection of high-quality Nextflow pipelines, such as `nf-core/rnaseq`, detail in https://nf-co.re/rnaseq/3.18.0/.
+
+#### Running the RNA-seq pipeline on CARC HPC
+
+Verify `nf-core/rnaseq` pipelie:
+```angular2html
+./nextflow run nf-core/rnaseq --help
+```
+
+Help document output:
+```angular2html
+ N E X T F L O W   ~  version 24.10.4
+
+Launching `https://github.com/nf-core/rnaseq` [gigantic_boltzmann] DSL2 - revision: 33df0c05ef [master]
+
+
+
+------------------------------------------------------
+                                        ,--./,-.
+        ___     __   __   __   ___     /,-._.--~'
+  |\ | |__  __ /  ` /  \ |__) |__         }  {
+  | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                        `._,._,'
+  nf-core/rnaseq v3.16.0-g33df0c0
+------------------------------------------------------
+Typical pipeline command:
+
+  nextflow run nf-core/rnaseq -profile <docker/singularity/.../institute> --input samplesheet.csv --genome GRCh37 --outdir <OUTDIR>
+
+Input/output options
+  --input                            [string]  Path to comma-separated file containing information about the samples in the experiment.
+  --outdir                           [string]  The output directory where the results will be saved. You have to use absolute paths to storage on Cloud
+                                               infrastructure.
+  --email                            [string]  Email address for completion summary.
+  --multiqc_title                    [string]  MultiQC report title. Printed as page header, used for filename if not otherwise specified.
+```
+
+To check that everything is installed and working correctly, run the RNA-seq pipeline with a small built-in test dataset:
+
+```angular2html
+./nextflow run nf-core/rnaseq \
+    -profile test,singularity \
+    --outdir rnaseq_output --max_cpus 1
+```
+
+Output logs:
+```angular2html
+executor >  local (198)
+[b9/a5890a] NFCORE_RNASEQ:PREPARE_GENOME:GUNZIP_GTF (genes_with_empty_tid.gtf.gz)        [100%] 1 of 1 ✔
+[25/2743a0] NFCORE_RNASEQ:PREPARE_GENOME:GTF_FILTER (genome.fasta)                       [100%] 1 of 1 ✔
+[6b/7c07ac] NFCORE_RNASEQ:PREPARE_GENOME:GUNZIP_ADDITIONAL_FASTA (gfp.fa.gz)             [100%] 1 of 1 ✔
+[29/5b1a5f] NFCORE_RNASEQ:PREPARE_GENOME:CUSTOM_CATADDITIONALFASTA (null)                [100%] 1 of 1 ✔
+[51/40e1e8] NFCORE_RNASEQ:PREPARE_GENOME:GTF2BED (genome_gfp.gtf)                        [100%] 1 of 1 ✔
+[94/9e2518] NFCORE_RNASEQ:PREPARE_GENOME:CUSTOM_GETCHROMSIZES (genome_gfp.fasta)         [100%] 1 of 1 ✔
+[a8/7ddf96] NFCORE_RNASEQ:PREPARE_GENOME:BBMAP_BBSPLIT (null)                            [100%] 1 of 1 ✔
+[93/47e79d] NFCORE_RNASEQ:PREPARE_GENOME:STAR_GENOMEGENERATE (genome_gfp.fasta)          [100%] 1 of 1 ✔
+[a3/8f16aa] NFCORE_RNASEQ:PREPARE_GENOME:UNTAR_SALMON_INDEX (salmon.tar.gz)              [100%] 1 of 1 ✔
+[30/3c38f2] NFC…E_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:CAT_FASTQ (WT_REP1) [100%] 2 of 2 ✔
+[2a/ea0035] NFC…FILTER_SETSTRANDEDNESS:FASTQ_FASTQC_UMITOOLS_TRIMGALORE:FASTQC (WT_REP1) [100%] 5 of 5 ✔
+[d1/dcab93] NFC…ER_SETSTRANDEDNESS:FASTQ_FASTQC_UMITOOLS_TRIMGALORE:TRIMGALORE (WT_REP1) [100%] 5 of 5 ✔
+[22/6993fb] NFC…FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:BBMAP_BBSPLIT (RAP1_UNINDUCED_REP2) [100%] 5 of 5 ✔
+[54/c82f7e] NFC…_FILTER_SETSTRANDEDNESS:FASTQ_SUBSAMPLE_FQ_SALMON:FQ_SUBSAMPLE (WT_REP1) [100%] 1 of 1 ✔
+[0d/a5a756] NFC…_FILTER_SETSTRANDEDNESS:FASTQ_SUBSAMPLE_FQ_SALMON:SALMON_QUANT (WT_REP1) [100%] 1 of 1 ✔
+[a7/a08f56] NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:STAR_ALIGN (WT_REP1)                         [100%] 5 of 5 ✔
+[31/10fe6c] NFC…RNASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:SAMTOOLS_SORT (WT_REP1) [100%] 5 of 5 ✔
+[7e/f7df55] NFC…NASEQ:RNASEQ:ALIGN_STAR:BAM_SORT_STATS_SAMTOOLS:SAMTOOLS_INDEX (WT_REP1) [100%] 5 of 5 ✔
+[01/2f6df2] NFC…STAR:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS (WT_REP1) [100%] 5 of 5 ✔
+[34/9f460b] NFC…R:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT (WT_REP1) [100%] 5 of 5 ✔
+[15/70b00a] NFC…R:BAM_SORT_STATS_SAMTOOLS:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS (WT_REP1) [100%] 5 of 5 ✔
+[50/f7b2fb] NFCORE_RNASEQ:RNASEQ:QUANTIFY_STAR_SALMON:SALMON_QUANT (WT_REP1)             [100%] 5 of 5 ✔
+[1c/2578e2] NFCORE_RNASEQ:RNASEQ:QUANTIFY_STAR_SALMON:CUSTOM_TX2GENE (null)              [100%] 1 of 1 ✔
+[33/50d136] NFCORE_RNASEQ:RNASEQ:QUANTIFY_STAR_SALMON:TXIMETA_TXIMPORT                   [100%] 1 of 1 ✔
+[56/664f6f] NFCORE_RNASEQ:RNASEQ:QUANTIFY_STAR_SALMON:SE_GENE (all_samples)              [100%] 1 of 1 ✔
+[34/2c9e11] NFC…E_RNASEQ:RNASEQ:QUANTIFY_STAR_SALMON:SE_GENE_LENGTH_SCALED (all_samples) [100%] 1 of 1 ✔
+[ed/922cb4] NFCORE_RNASEQ:RNASEQ:QUANTIFY_STAR_SALMON:SE_GENE_SCALED (all_samples)       [100%] 1 of 1 ✔
+[73/f5a836] NFCORE_RNASEQ:RNASEQ:QUANTIFY_STAR_SALMON:SE_TRANSCRIPT (all_samples)        [100%] 1 of 1 ✔
+[7d/673b7e] NFCORE_RNASEQ:RNASEQ:DESEQ2_QC_STAR_SALMON                                   [100%] 1 of 1 ✔
+[ca/1adb09] NFC…_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:PICARD_MARKDUPLICATES (WT_REP1) [100%] 5 of 5 ✔
+[0e/597118] NFCORE_RNASEQ:RNASEQ:BAM_MARKDUPLICATES_PICARD:SAMTOOLS_INDEX (WT_REP1)      [100%] 5 of 5 ✔
+[46/e72046] NFC…UPLICATES_PICARD:BAM_STATS_SAMTOOLS:SAMTOOLS_STATS (RAP1_UNINDUCED_REP2) [100%] 5 of 5 ✔
+[bb/83da2e] NFC…BAM_MARKDUPLICATES_PICARD:BAM_STATS_SAMTOOLS:SAMTOOLS_FLAGSTAT (WT_REP1) [100%] 5 of 5 ✔
+[31/a79db7] NFC…BAM_MARKDUPLICATES_PICARD:BAM_STATS_SAMTOOLS:SAMTOOLS_IDXSTATS (WT_REP1) [100%] 5 of 5 ✔
+[73/dd8696] NFCORE_RNASEQ:RNASEQ:STRINGTIE_STRINGTIE (WT_REP1)                           [100%] 5 of 5 ✔
+[1a/f6883f] NFCORE_RNASEQ:RNASEQ:SUBREAD_FEATURECOUNTS (WT_REP1)                         [100%] 5 of 5 ✔
+[fb/6062ae] NFCORE_RNASEQ:RNASEQ:MULTIQC_CUSTOM_BIOTYPE (WT_REP1)                        [100%] 5 of 5 ✔
+[61/29a96c] NFCORE_RNASEQ:RNASEQ:BEDTOOLS_GENOMECOV_FW (WT_REP1)                         [100%] 5 of 5 ✔
+[34/d5d9f0] NFCORE_RNASEQ:RNASEQ:BEDTOOLS_GENOMECOV_REV (WT_REP1)                        [100%] 5 of 5 ✔
+[5d/462fcd] NFC…:RNASEQ:BEDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_FORWARD:UCSC_BEDCLIP (WT_REP1) [100%] 5 of 5 ✔
+[63/cdceee] NFC…EDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_FORWARD:UCSC_BEDGRAPHTOBIGWIG (WT_REP1) [100%] 5 of 5 ✔
+[ab/eb3daf] NFC…:RNASEQ:BEDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_REVERSE:UCSC_BEDCLIP (WT_REP1) [100%] 5 of 5 ✔
+[32/14f473] NFC…EDGRAPH_BEDCLIP_BEDGRAPHTOBIGWIG_REVERSE:UCSC_BEDGRAPHTOBIGWIG (WT_REP1) [100%] 5 of 5 ✔
+[57/82b41c] NFCORE_RNASEQ:RNASEQ:QUALIMAP_RNASEQ (WT_REP1)                               [100%] 5 of 5 ✔
+[c5/19ff0f] NFCORE_RNASEQ:RNASEQ:DUPRADAR (WT_REP1)                                      [100%] 5 of 5 ✔
+[4a/c2ed0d] NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_BAMSTAT (WT_REP1)                       [100%] 5 of 5 ✔
+[60/6d4001] NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_INNERDISTANCE (WT_REP1)                 [100%] 5 of 5 ✔
+[b1/743c95] NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_INFEREXPERIMENT (WT_REP1)               [100%] 5 of 5 ✔
+[08/5e67cd] NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_JUNCTIONANNOTATION (WT_REP1)            [100%] 5 of 5 ✔
+[c6/5570b3] NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_JUNCTIONSATURATION (WT_REP1)            [100%] 5 of 5 ✔
+[6b/12e42d] NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_READDISTRIBUTION (WT_REP1)              [100%] 5 of 5 ✔
+[44/efeb7f] NFCORE_RNASEQ:RNASEQ:BAM_RSEQC:RSEQC_READDUPLICATION (WT_REP1)               [100%] 5 of 5 ✔
+[1a/70d658] NFCORE_RNASEQ:RNASEQ:QUANTIFY_PSEUDO_ALIGNMENT:SALMON_QUANT (WT_REP1)        [100%] 5 of 5 ✔
+[4a/38bbb5] NFCORE_RNASEQ:RNASEQ:QUANTIFY_PSEUDO_ALIGNMENT:CUSTOM_TX2GENE (null)         [100%] 1 of 1 ✔
+[25/3a7126] NFCORE_RNASEQ:RNASEQ:QUANTIFY_PSEUDO_ALIGNMENT:TXIMETA_TXIMPORT              [100%] 1 of 1 ✔
+[67/4d8f96] NFCORE_RNASEQ:RNASEQ:QUANTIFY_PSEUDO_ALIGNMENT:SE_GENE (all_samples)         [100%] 1 of 1 ✔
+[76/f96c5c] NFC…SEQ:RNASEQ:QUANTIFY_PSEUDO_ALIGNMENT:SE_GENE_LENGTH_SCALED (all_samples) [100%] 1 of 1 ✔
+[79/80a5ac] NFCORE_RNASEQ:RNASEQ:QUANTIFY_PSEUDO_ALIGNMENT:SE_GENE_SCALED (all_samples)  [100%] 1 of 1 ✔
+[13/1fc4be] NFCORE_RNASEQ:RNASEQ:QUANTIFY_PSEUDO_ALIGNMENT:SE_TRANSCRIPT (all_samples)   [100%] 1 of 1 ✔
+[1a/866a33] NFCORE_RNASEQ:RNASEQ:DESEQ2_QC_PSEUDO                                        [100%] 1 of 1 ✔
+[d2/11ee25] NFCORE_RNASEQ:RNASEQ:MULTIQC (1)                                             [100%] 1 of 1 ✔
+-[nf-core/rnaseq] Pipeline completed successfully -
+Completed at: 02-Mar-2025 21:53:10
+Duration    : 24m 29s
+CPU hours   : 0.4
+Succeeded   : 198
+```
+
+---
+## Section 2: Long-read Software Installation
 
 ### Installation of long read Nanopore sequencing analysis tools
 
@@ -107,10 +268,10 @@ Inspect specific read details:
 singularity exec tool/dorado_latest.sif \
     pod5 inspect read ${pod5_file}  f84e44c5-15d2-4227-adb7-fb1b206dc128
 ```
+---
 
 
-
-## Session 2: Long read basecall and methylation call
+## Session 3: Long read basecall and methylation call
 
 ### Dorado basecall and methylation call
 #### Prerequisite files
@@ -185,7 +346,8 @@ total 2.5K
 
 ![IGV Snapshot of SNRPN](https://raw.githubusercontent.com/LabShengLi/BIOC599_LongRead/tutorial/pic/igv_snapshot_SNRPN.png)
 
-## Session 3: Haplotype phasing
+---
+## Session 4: Haplotype phasing
 
 Run **Clair3** for haplotype phasing, firstly, run Clair3 Variant calling and Phasing:
 ```
