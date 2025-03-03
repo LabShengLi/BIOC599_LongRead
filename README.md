@@ -15,6 +15,10 @@ srun --pty -p main --time=02:00:00 -n 2 --mem 16GB bash
 ### Install nextflow
 Nextflow is a workflow management system that enables scalable and reproducible scientific workflows. Before installing Nextflow, make sure Java is installed on your system.
 
+**Reference paper:**
+
+Di Tommaso P, Chatzou M, Floden EW, Barja PP, Palumbo E, Notredame C. Nextflow enables reproducible computational workflows. Nat Biotechnol. 2017 Apr 11;35(4):316-319. doi: 10.1038/nbt.3820. https://pubmed.ncbi.nlm.nih.gov/28398311/
+
 
 #### Install Java and Nextflow
 
@@ -55,6 +59,8 @@ Nextflow simplifies and automates complex bioinformatics workflows, ensuring:
 - **Portability**: Supports environments like Docker, Singularity, and Conda for consistent software management.
 
 A popular, community-curated RNA-seq workflow is available through [nf-core](https://nf-co.re/), a collection of high-quality Nextflow pipelines, such as `nf-core/rnaseq`, detail in https://nf-co.re/rnaseq/3.18.0/.
+
+![nf_rnaseq](https://raw.githubusercontent.com/nf-core/rnaseq/3.12.0//docs/images/nf-core-rnaseq_metro_map_grey.png)
 
 #### Running the RNA-seq pipeline on CARC HPC
 
@@ -170,6 +176,25 @@ CPU hours   : 0.4
 Succeeded   : 198
 ```
 
+#### Singularity container
+[**Singularity**](https://docs.sylabs.io/guides/3.5/user-guide/introduction.html) is a container technology designed to run applications in a portable and reproducible way, especially in high-performance computing (HPC) environments. Unlike Docker, which often requires administrator (root) privileges, Singularity is built to work securely on shared systems where users do not have root access.
+
+Singularity allows you to package all the necessary software, libraries, and dependencies of a workflow into a single container file. This ensures that your analysis runs the same way on any system, regardless of the underlying operating system or installed software.
+
+
+![singularity_shema](https://biocorecrg.github.io/PHIND_course_nextflow_Feb_2022/_images/singularity_architecture.png)
+
+
+##### Why use Singularity with Nextflow?
+- **Reproducibility**: Ensures the same software environment is used every time.
+- **Portability**: Easily move workflows between different systems or clusters.
+- **No root needed**: Works on servers where Docker may not be available.
+
+##### Example usage in Nextflow:
+If a pipeline supports Singularity, you can enable it with the `-profile singularity` option:
+```bash
+nextflow run nf-core/rnaseq -profile singularity
+```
 ---
 ## Section 2: Long-read Software Installation
 
