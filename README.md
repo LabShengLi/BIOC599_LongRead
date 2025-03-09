@@ -6,11 +6,14 @@
 
 **Note**: if you already in compute node mode, you don't need to do this step.
 
-This command starts an interactive session on the cluster with 2 CPU cores and 16GB memory for 2 hours. More information check [documents](https://www.carc.usc.edu/user-guides/hpc-systems/using-our-hpc-systems/slurm-templates.html) in CARC HPC.
+This command starts an interactive session on the cluster with 2 CPU cores and 16GB memory for 2 hours. More information check [Slurm Job documents](https://www.carc.usc.edu/user-guides/hpc-systems/using-our-hpc-systems/slurm-templates.html) in CARC HPC.
 
 ```
 srun --pty -p main --time=02:00:00 -n 2 --mem 16GB bash
 ```
+
+**Note: You must enter into the `compute` mode to load/run most of the softwares, instead of the `log` mode.**
+
 ---
 
 Create and enter into a directory for this session's work:
@@ -91,12 +94,14 @@ Di Tommaso P, Chatzou M, Floden EW, Barja PP, Palumbo E, Notredame C. Nextflow e
 
 #### Install Java and Nextflow
 
-Nextflow requires Java 8 or higher. You can install it using the following commands, from [documents](https://www.carc.usc.edu/user-guides/advanced-hpc-programming/programming-languages/java.html) in CARC HPC:
+Nextflow requires Java 8 or higher. You can install it using the following commands, from [HPC with Java documents](https://www.carc.usc.edu/user-guides/advanced-hpc-programming/programming-languages/java.html) in CARC HPC:
 ```angular2html
 module avail jdk
-
+module spider openjdk
 module load openjdk/21.0.0_35
 ```
+
+**Note: You must enter into the `compute` mode to load/run most of softwares, instead of the `log` mode.**
 
 [Nextflow](https://www.nextflow.io/docs/latest/install.html#install-nextflow) can be installed with a single command:
 ```
