@@ -38,6 +38,5 @@ curl -s https://get.nextflow.io | bash
 ./nextflow  -v
 nextflow version 24.10.4.5934
 
-
 # ref: https://nf-co.re/rnaseq/3.18.0/
 ./nextflow run nf-core/rnaseq -profile test,singularity --outdir test1 --max_cpus 1

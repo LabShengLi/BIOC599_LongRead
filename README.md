@@ -12,6 +12,15 @@ This command starts an interactive session on the cluster with 2 CPU cores and 1
 srun --pty -p main --time=02:00:00 -n 2 --mem 16GB bash
 ```
 ---
+
+Create and enter into a directory for this session's work:
+
+```angular2html
+wdir="/scratch1/$USER/BIOC599_Software"
+mkdir -p $wdir
+cd $wdir
+pwd
+```
 ### Install nextflow
 Nextflow is a workflow management system that enables scalable and reproducible scientific workflows. Before installing Nextflow, make sure Java is installed on your system.
 
@@ -143,7 +152,7 @@ If a pipeline supports Singularity, you can enable it with the `-profile singula
 nextflow run nf-core/rnaseq -profile singularity
 ```
 ---
-## Section 2: Long-read Software Installation
+## Section 2: Long-read Software
 
 ### Installation of long read Nanopore sequencing analysis tools
 
