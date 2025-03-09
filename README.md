@@ -29,8 +29,8 @@ pwd
 
 Use module load to install:
 ```angular2html
-module avail fastqc
-module load fastqc
+module purge
+module load gcc/13.3.0 openjdk/21.0.0_35 fastqc
 ```
 
 Use Conda to install:
@@ -44,9 +44,9 @@ Verify `fastqc` installation:
 fastqc -v
 ```
 
-Test `fastqc` command:
+Test `fastqc` command on example data:
 ```angular2html
-# copy fastq files into current folder
+# copy fastq data into current folder
 ln -s /scratch1/yliu8962/BIOC599_Software/Sample1_R1.fastq.gz .
 
 # run fastqc
