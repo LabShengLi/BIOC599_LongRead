@@ -21,7 +21,67 @@ mkdir -p $wdir
 cd $wdir
 pwd
 ```
-### Install nextflow
+
+### Traditional software installation
+
+Use module load to install:
+```angular2html
+module avail fastqc
+module load fastqc
+```
+
+Use Conda to install:
+```angular2html
+conda search fastqc
+conda install fastqc
+```
+
+Verify `fastqc` installation:
+```angular2html
+fastqc -v
+```
+
+Test `fastqc` command:
+```angular2html
+# copy fastq files into current folder
+ln -s /scratch1/yliu8962/BIOC599_Software/Sample1_R1.fastq.gz .
+
+# run fastqc
+fastqc Sample1_R1.fastq.gz
+```
+
+
+#### Singularity container
+[**Singularity**](https://docs.sylabs.io/guides/3.5/user-guide/introduction.html) is a container technology designed to run applications in a portable and reproducible way, especially in high-performance computing (HPC) environments. Unlike Docker, which often requires administrator (root) privileges, Singularity is built to work securely on shared systems where users do not have root access.
+
+Singularity allows you to package all the necessary software, libraries, and dependencies of a workflow into a single container file. This ensures that your analysis runs the same way on any system, regardless of the underlying operating system or installed software.
+
+
+![singularity_shema](https://biocorecrg.github.io/PHIND_course_nextflow_Feb_2022/_images/singularity_architecture.png)
+
+#### Run software using Singularity 
+
+Verify Singularity command:
+```angular2html
+singularity --version
+singularity --help
+```
+
+Run an `Hello World` program using Singularity:
+```angular2html
+export LC_ALL=C
+singularity exec docker://grycap/cowsay \
+    /usr/games/cowsay "Hello Singularity!"
+```
+
+Run `fastqc` using Singularity:
+```angular2html
+export LC_ALL=C
+singularity exec docker://biocontainers/fastqc:v0.11.9_cv8 \
+    fastqc Sample1_R1.fastq.gz
+```
+
+### Nextflow pipeline technology
 Nextflow is a workflow management system that enables scalable and reproducible scientific workflows. Before installing Nextflow, make sure Java is installed on your system.
 
 **Reference paper:**
@@ -131,15 +191,6 @@ Duration    : 24m 29s
 CPU hours   : 0.4
 Succeeded   : 198
 ```
-
-#### Singularity container
-[**Singularity**](https://docs.sylabs.io/guides/3.5/user-guide/introduction.html) is a container technology designed to run applications in a portable and reproducible way, especially in high-performance computing (HPC) environments. Unlike Docker, which often requires administrator (root) privileges, Singularity is built to work securely on shared systems where users do not have root access.
-
-Singularity allows you to package all the necessary software, libraries, and dependencies of a workflow into a single container file. This ensures that your analysis runs the same way on any system, regardless of the underlying operating system or installed software.
-
-
-![singularity_shema](https://biocorecrg.github.io/PHIND_course_nextflow_Feb_2022/_images/singularity_architecture.png)
-
 
 ##### Why use Singularity with Nextflow?
 - **Reproducibility**: Ensures the same software environment is used every time.
