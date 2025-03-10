@@ -62,6 +62,9 @@ Singularity allows you to package all the necessary software, libraries, and dep
 
 ![singularity_shema](https://biocorecrg.github.io/PHIND_course_nextflow_Feb_2022/_images/singularity_architecture.png)
 
+<div align="center"> Source: https://tin6150.github.io/psg/blogger_container_hpc.html </div>
+
+
 #### Run software using Singularity 
 
 Verify Singularity command:
