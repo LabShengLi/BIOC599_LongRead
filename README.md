@@ -2,6 +2,12 @@
 
 ## Section 1: Software Installation
 
+### Prerequisite
+
+You must have access to [CARC OnDemand](https://ondemand.carc.usc.edu/pun/sys/dashboard/) and be able to start a Cluster Shell Access session.
+
+![On_Demand_Shell](https://raw.githubusercontent.com/LabShengLi/BIOC599_LongRead/tutorial/pic/ondemand_shell_app.png)
+
 ### Enter into interactive mode
 
 **Note**: if you already in compute node mode, you don't need to do this step.
