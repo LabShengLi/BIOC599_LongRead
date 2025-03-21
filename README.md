@@ -15,7 +15,7 @@ You must have access to [CARC OnDemand](https://ondemand.carc.usc.edu/pun/sys/da
 This command starts an interactive session on the cluster with 2 CPU cores and 16GB memory for 2 hours. More information check [Slurm Job documents](https://www.carc.usc.edu/user-guides/hpc-systems/using-our-hpc-systems/slurm-templates.html) in CARC HPC.
 
 ```
-srun --pty -p main --time=02:00:00 -n 2 --mem 16GB bash
+srun --pty -p main --time=02:00:00 -n 2 --mem 8GB bash
 ```
 
 **Note: You must enter into the `compute` mode to load/run most of the softwares, instead of the `log` mode.**
@@ -73,6 +73,11 @@ Singularity allows you to package all the necessary software, libraries, and dep
 
 #### Run software using Singularity 
 
+Load singularity from HPC:
+```angular2html
+module load apptainer
+```
+
 Verify Singularity command:
 ```angular2html
 singularity --version
@@ -105,7 +110,6 @@ Di Tommaso P, Chatzou M, Floden EW, Barja PP, Palumbo E, Notredame C. Nextflow e
 
 Nextflow requires Java 8 or higher. You can install it using the following commands, from [HPC with Java documents](https://www.carc.usc.edu/user-guides/advanced-hpc-programming/programming-languages/java.html) in CARC HPC:
 ```angular2html
-module avail jdk
 module spider openjdk
 module load openjdk/21.0.0_35
 ```
