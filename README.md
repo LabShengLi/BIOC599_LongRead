@@ -12,7 +12,7 @@ You must have access to [CARC OnDemand](https://ondemand.carc.usc.edu/pun/sys/da
 
 **Note**: if you already in compute node mode, you don't need to do this step.
 
-This command starts an interactive session on the cluster with 2 CPU cores and 16GB memory for 2 hours. More information check [Slurm Job documents](https://www.carc.usc.edu/user-guides/hpc-systems/using-our-hpc-systems/slurm-templates.html) in CARC HPC.
+This command starts an interactive session on the cluster with 2 CPU cores and 8GB memory for 2 hours. More information check [Slurm Job documents](https://www.carc.usc.edu/user-guides/hpc-systems/using-our-hpc-systems/slurm-templates.html) in CARC HPC.
 
 ```
 srun --pty -p main --time=02:00:00 -n 2 --mem 8GB bash
