@@ -22,6 +22,9 @@ cd /project/sli68423_1316/users/yang/long_read_tutorial/nextflow_demo
 nextflow run nf-core/rnaseq -profile test,singularity --outdir test1 --max_cpus 1
 
 
+
+salloc -p debug -c 4
+
 exit 0
 
 # ref: https://www.carc.usc.edu/user-guides/hpc-systems/using-our-hpc-systems/slurm-templates.html
