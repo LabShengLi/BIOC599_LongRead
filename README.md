@@ -12,13 +12,14 @@ You must have access to [CARC OnDemand](https://ondemand.carc.usc.edu/pun/sys/da
 
 **Note**: if you already in compute node mode, you don't need to do this step.
 
-This command starts an interactive session on the cluster with 2 CPU cores and 8GB memory for 2 hours. More information check [Slurm Job documents](https://www.carc.usc.edu/user-guides/hpc-systems/using-our-hpc-systems/slurm-templates.html) in CARC HPC.
+This command starts an interactive session on the cluster with multiple CPU cores and memory. More information check [Slurm Job documents](https://www.carc.usc.edu/user-guides/hpc-systems/using-our-hpc-systems/slurm-templates.html) in CARC HPC.
 
 ```
-srun --pty -p main --time=02:00:00 -n 2 --mem 8GB bash
+## srun --pty -p main --time=02:00:00 -n 2 --mem 8GB bash
+salloc -p debug -c 4
 ```
 
-**Note: You must enter into the `compute` mode to load/run most of the softwares, instead of the `log` mode.**
+**Note: You must enter into the `compute` (`interactive`) mode to load/run most of the software, instead of the `log` mode.**
 
 ---
 
@@ -94,7 +95,7 @@ singularity exec docker://grycap/cowsay \
 Run `fastqc` using Singularity:
 ```angular2html
 export LC_ALL=C
-singularity exec docker://biocontainers/fastqc:v0.11.9_cv8 \
+singularity exec -B /scratch1 docker://biocontainers/fastqc:v0.11.9_cv8 \
     fastqc Sample1_R1.fastq.gz
 ```
 
