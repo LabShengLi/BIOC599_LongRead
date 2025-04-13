@@ -224,6 +224,20 @@ nextflow run nf-core/rnaseq -profile singularity
 ---
 ## Section 2: Long-read Software
 
+### Enter into interactive mode
+
+**Note**: if you already in compute node mode, you don't need to do this step.
+
+This command starts an interactive session on the cluster with multiple CPU cores and memory. More information check [Slurm Job documents](https://www.carc.usc.edu/user-guides/hpc-systems/using-our-hpc-systems/slurm-templates.html) in CARC HPC.
+
+```
+## srun --pty -p gpu --time=02:00:00 -n 8 --mem 32GB --gres=gpu:v100:1 bash  
+## srun --pty -p main --time=02:00:00 -n 8 --mem 32GB bash
+salloc -p main -c 8 --mem 32GB --time=02:00:00
+```
+
+**Note: You must enter into the `compute` (`interactive`) mode to load/run most of the software, instead of the `log` mode.**
+
 ### Installation of long read Nanopore sequencing analysis tools
 
 We will install tools using Conda and Singularity. Firstly, create a folder for tool installation:
@@ -233,14 +247,25 @@ mkdir -p $wdir
 cd $wdir
 pwd
 ```
-
+<!--
 #### Basecall and Methylation call tool: Dorado
 Download the **Dorado** container from DockerHub using Singularity.
 
 ```
+module load apptainer
+
 mkdir -p tool
 singularity pull --dir tool/ docker://nanoporetech/dorado
 ```
+
+
+```
+module load apptainer
+
+mkdir -p tool
+singularity pull --dir tool/ docker://nanoporetech/dorado
+```
+
 
 #### Genetic Variant Call tool: Clair3
 Download the **Clair3** container for variant calling.
@@ -248,18 +273,24 @@ Download the **Clair3** container for variant calling.
 ```
 singularity pull --dir tool/ docker://hkubal/clair3
 ```
+-->
 
 #### Verify installation
 Run these commands to check if the installed tools are working correctly.
 
 Verify Dorado:
 ```
-singularity exec tool/dorado_latest.sif     dorado -vv
+module load apptainer
+dorado_image=/scratch1/yliu8962/BIOC599_LongRead/tool/dorado_latest.sif
+singularity exec ${dorado_image} \
+    dorado -vv
 ```
 
 Verify Clair3:
 ```
-singularity exec tool/clair3_latest.sif run_clair3.sh --version
+clair3_image=/scratch1/yliu8962/BIOC599_LongRead/tool/clair3_latest.sif
+singularity exec  ${clair3_image} \
+    run_clair3.sh --version
 ```
 
 #### Download basecall and methylation call models for Dorado
@@ -272,14 +303,16 @@ dorado_meth_model="dna_r9.4.1_e8_fast@v3.4_5mCG@v0.1"
 
 mkdir -p $dorado_model_dir
 
-singularity exec tool/dorado_latest.sif \
+singularity exec ${dorado_image}  \
     dorado -vv
 
-singularity exec tool/dorado_latest.sif \
+singularity exec ${dorado_image}  \
     dorado download --model ${dorado_base_model} --models-directory ${dorado_model_dir}
 
-singularity exec tool/dorado_latest.sif \
+singularity exec ${dorado_image} \
     dorado download --model ${dorado_meth_model} --models-directory ${dorado_model_dir}
+    
+ls tool/models/
 ```
 
 
@@ -296,27 +329,29 @@ pod5_file="data/nanopore_demo_data.pod5"
 wget --no-check-certificate ${online_pod5_file}  -O ${pod5_file}
 
 # load genome reference
-ln -s /scratch1/yliu8962/shared/hg38_chr11_chr15.fa.fai data/
-ln -s /scratch1/yliu8962/shared/hg38_chr11_chr15.fa data/
+cp /scratch1/yliu8962/shared/hg38_chr11_chr15.fa.fai data/
+cp /scratch1/yliu8962/shared/hg38_chr11_chr15.fa data/
+
+ls data/
 ```
 
 #### Inspect POD5 files
 
 Check the summary of the **POD5** format Nanopore input file:
 ```
-singularity exec tool/dorado_latest.sif \
+singularity exec ${dorado_image} \
     pod5 inspect summary ${pod5_file}
 ```
 
 Check read-level details:
 ```
-singularity exec tool/dorado_latest.sif \
-    pod5 inspect reads ${pod5_file}
+singularity exec ${dorado_image} \
+    pod5 inspect reads ${pod5_file} | head
 ```
 
 Inspect specific read details:
 ```
-singularity exec tool/dorado_latest.sif \
+singularity exec ${dorado_image} \
     pod5 inspect read ${pod5_file}  f84e44c5-15d2-4227-adb7-fb1b206dc128
 ```
 ---
@@ -344,7 +379,7 @@ ls data/
 ```
 hg38_chr11_chr15.fa  hg38_chr11_chr15.fa.fai  nanopore_demo_data.pod5
 ```
-
+<!--
 Verify installed tools:
 ```
 ls tool/
@@ -354,6 +389,8 @@ ls tool/
 ```
 clair3_latest.sif  dorado_latest.sif  models
 ```
+-->
+
 
 #### Basecall and methylation call
 
@@ -370,7 +407,7 @@ export SINGULARITY_BIND="/project,/scratch1"
 
 mkdir -p analysis/dorado_call
 
-singularity exec tool/dorado_latest.sif \
+singularity exec ${dorado_image} \
     dorado basecaller \
         ${dorado_model_dir}/$dorado_base_model \
         $indir/ \
@@ -403,7 +440,7 @@ total 2.5K
 Run **Clair3** for haplotype phasing, firstly, run Clair3 Variant calling and Phasing:
 ```
 dsname="Human1"
-inbam_fn="analysis/dorado_call/calls_2025-01-31_T23-20-55.bam"
+inbam_fn=$(ls analysis/dorado_call/calls_*.bam  | head -n 1)
 genome="$wdir/data/hg38_chr11_chr15.fa"
 outdir="analysis/clair3_phasing"
 
@@ -419,7 +456,7 @@ haplotagBamFile="${outdir}/haplotag.bam"
 export SINGULARITY_BIND="/project,/scratch1"
 
 mkdir -p $outdir
-singularity exec tool/clair3_latest.sif \
+singularity exec ${clair3_image} \
     run_clair3.sh \
         --sample_name=${dsname} \
           --bam_fn=${inbam_fn} \
@@ -434,10 +471,10 @@ singularity exec tool/clair3_latest.sif \
 
 Next, run haplotag for BAM file:
 ```
-singularity exec tool/clair3_latest.sif \
+singularity exec ${clair3_image}  \
     whatshap --version
 
-singularity exec tool/clair3_latest.sif \
+singularity exec ${clair3_image} \
     whatshap  haplotag \
         --ignore-read-groups\
         --reference ${genome}\
@@ -463,7 +500,7 @@ Finished in 1.3 s
 Then, extract **haplotype 1 (HP1)** and **haplotype 2 (HP2)** reads from BAM:
 ```
 # Extract h1 and h2 haplotype reads
-singularity exec tool/clair3_latest.sif \
+singularity exec ${clair3_image} \
 whatshap split \
     --output-h1 ${outdir}/${dsname}_split_HP1.bam \
     --output-h2 ${outdir}/${dsname}_split_HP2.bam \
@@ -472,10 +509,10 @@ whatshap split \
     ${tsvFile}
 
 # Index haplotype BAM files:
-singularity exec tool/clair3_latest.sif \
+singularity exec ${clair3_image} \
     samtools index -@ ${cpus} ${outdir}/${dsname}_split_HP1.bam
 
-singularity exec tool/clair3_latest.sif \
+singularity exec ${clair3_image} \
     samtools index -@ ${cpus} ${outdir}/${dsname}_split_HP2.bam
 ```
 
