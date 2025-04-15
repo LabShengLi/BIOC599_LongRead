@@ -438,8 +438,10 @@ total 2.5K
 Convert BAM file into BED file format using Modkit:
 ```angular2html
 inbam_fn=$(ls analysis/dorado_call/calls_*.bam  | head -n 1)
+echo $inbam_fn
 
-singularity exec $modkit modkit pileup  $inbam_fn calls_dorado_5mC.bed
+singularity exec $modkit \
+    modkit pileup  $inbam_fn calls_dorado_5mC.bed
 
 head calls_dorado_5mC.bed
 ```
