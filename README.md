@@ -293,6 +293,13 @@ singularity exec  ${clair3_image} \
     run_clair3.sh --version
 ```
 
+Verify ModKit:
+```
+modkit=/scratch1/yliu8962/BIOC599_LongRead/tool/modkit_latest.sif
+singularity exec $modkit \
+    modkit -V
+```
+
 #### Download basecall and methylation call models for Dorado
 Download necessary models for **basecalling** and **methylation detection**.
 ```
@@ -428,6 +435,15 @@ total 2.5K
 ```
 
 
+Convert BAM file into BED file format using Modkit:
+```angular2html
+inbam_fn=$(ls analysis/dorado_call/calls_*.bam  | head -n 1)
+
+singularity exec $modkit modkit pileup  $inbam_fn calls_dorado_5mC.bed
+
+head calls_dorado_5mC.bed
+```
+
 #### IGV visualization of methylation states in BAM file
 
 ![IGV Snapshot of KCNQ1](https://raw.githubusercontent.com/LabShengLi/BIOC599_LongRead/tutorial/pic/igv_snapshot_KCNQ1.png)
@@ -550,3 +566,54 @@ haplotag.tsv               log                        phased_merge_output.vcf.gz
 #### IGV visualization of haplotype phasing
 
 ![IGV Snapshot of MethPhase](https://raw.githubusercontent.com/LabShengLi/BIOC599_LongRead/tutorial/pic/igv_snapshot_methphase.png)
+
+
+## Session 5: Long read final project software installation
+
+
+Verify Dorado:
+```
+module load apptainer
+dorado_image=/scratch1/yliu8962/BIOC599_LongRead/tool/dorado_latest.sif
+singularity exec ${dorado_image} \
+    dorado -vv
+```
+
+Verify Clair3:
+```
+clair3_image=/scratch1/yliu8962/BIOC599_LongRead/tool/clair3_latest.sif
+singularity exec  ${clair3_image} \
+    run_clair3.sh --version
+```
+
+Verify ModKit:
+```
+modkit=/scratch1/yliu8962/BIOC599_LongRead/tool/modkit_latest.sif
+singularity exec $modkit \
+    modkit -V
+```
+
+Fastq QC tool in R package, start the OnDemand RStudio:
+```angular2html
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("ShortRead")
+```
+
+Verify ShortRead R pakcage in R:
+```angular2html
+library(ShortRead)
+```
+
+Quality control R scripts:
+```angular2html
+fq <- readFastq("your_file.fastq.gz")  # Can read .fastq or .fastq.gz
+
+fq  # Returns a ShortReadQ object
+
+length(fq)        # Number of reads
+sread(fq)         # The actual sequences
+quality(fq)       # Quality scores
+id(fq)            # Read IDs
+```
