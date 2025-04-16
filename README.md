@@ -414,7 +414,7 @@ export SINGULARITY_BIND="/project,/scratch1"
 
 mkdir -p analysis/dorado_call
 
-singularity exec ${dorado_image} \
+singularity exec --nv ${dorado_image} \
     dorado basecaller \
         ${dorado_model_dir}/$dorado_base_model \
         $indir/ \
@@ -446,13 +446,31 @@ singularity exec $modkit \
 head analysis/dorado_call/calls_dorado_5mC.bed
 ```
 
+
+Convert BAM file into FASTQ file using samtools:
+```angular2html
+inbam_fn=$(ls analysis/dorado_call/calls_*.bam  | head -n 1)
+echo $inbam_fn
+
+singularity exec $dorado_image \
+    samtools fastq $inbam_fn | gzip > analysis/dorado_call/dorado_call.fastq.gz
+```
+
+
 #### IGV visualization of methylation states in BAM file
 
+Open OnDemand Traveller Desktop, start IGV Viewer, load BAM files to visualize methylation reads in _KCNQ1_ and _SNURF_ gene regions.
+
+
 ![IGV Snapshot of KCNQ1](https://raw.githubusercontent.com/LabShengLi/BIOC599_LongRead/tutorial/pic/igv_snapshot_KCNQ1.png)
+
 
 ![IGV Snapshot of SNRPN](https://raw.githubusercontent.com/LabShengLi/BIOC599_LongRead/tutorial/pic/igv_snapshot_SNRPN.png)
 
 ---
+
+
+
 ## Session 4: Haplotype phasing
 
 Run **Clair3** for haplotype phasing, firstly, run Clair3 Variant calling and Phasing:
