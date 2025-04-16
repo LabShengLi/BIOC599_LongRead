@@ -421,7 +421,6 @@ singularity exec ${dorado_image} \
         --modified-bases-models ${dorado_model_dir}/${dorado_meth_model} \
         -x auto --verbose \
         --reference $genome \
-        --emit-fastq \
         --output-dir analysis/dorado_call \
         --batchsize 8
 
