@@ -683,7 +683,64 @@ executor {
 }
 ```
 
+Expected outputs:
 
+```
+Nextflow 25.10.4 is available - Please consider updating your version to it
+
+ N E X T F L O W   ~  version 25.04.8
+
+WARN: It appears you have never run this project before -- Option `-resume` is ignored
+Launching `/project2/sli68423_1316/users/yang/workspace/nanome/main.nf` [peaceful_ochoa] DSL2 - revision: 1b3231db17
+
+NANOME - NF PIPELINE (v2.0.0)
+by Sheng Li Lab
+https://github.com/LabShengLi/nanome
+=================================
+dsname              : hg002
+input               : /project2/rhie_131/bioc599/shared/long_read_nanome/in_bam
+genome              : /project2/rhie_131/bioc599/shared/long_read_nanome/hg38
+
+Running settings   : --------
+processors          : 2
+chrSet              : chr1,chr2,chr3,chr4,chr5,chr6,chr7,chr8,chr9,chr10,chr11,chr12,chr13,chr14,chr15,chr16,chr17,chr18,chr19,chr20,chr21,chr22,chrX,chrY
+dataType            : human
+runBasecall         : Yes
+runNanopolish       : Yes
+runMegalodon        : Yes
+runDeepSignal       : Yes
+runNANOME           : Yes
+tomboResquiggleOptions: --signal-length-range 0 500000  --sequence-length-range 0 50000
+outputBam           : true
+outputRaw           : true
+phasing             : true
+
+Model summary      : --------
+GUPPY_BASECALL_MODEL: dna_r9.4.1_450bps_hac.cfg
+NANOME_MODEL/CS_MODEL_FILE: nanome_cs/xgboost_basic_w
+MEGALODON_MODEL     : Remora:dna_r9.4.1_e8
+DEEPSIGNAL2_MODEL_FILE/DEEPSIGNAL2_MODEL_NAME: https://storage.googleapis.com/jax-nanopore-01-project-data/nanome-input/model.dp2.CG.R9.4_1D.human_hx1.bn17_sn16.both_bilstm.b17_s16_epoch4.ckpt.tar.gz/model.dp2.CG.R9.4_1D.human_hx1.bn17_sn16.both_bilstm.b17_s16_epoch4.ckpt
+DORADO_BASECALL_MODEL: dna_r10.4.1_e8.2_400bps_hac@v5.0.0
+DORADO_METHCALL_MODEL: dna_r10.4.1_e8.2_400bps_hac@v5.0.0_5mCG_5hmCG@v3
+
+Pipeline settings  : --------
+Working dir         : /project2/rhie_131/bioc599/shared/long_read_nanome/run_nanome_cmd/work
+Output dir          : results
+Launch dir          : /project2/rhie_131/bioc599/shared/long_read_nanome/run_nanome_cmd
+Script dir          : /project2/sli68423_1316/users/yang/workspace/nanome
+User                : yliu8962
+Profile             : singularity
+Config files        : /project2/sli68423_1316/users/yang/workspace/nanome/nextflow.config
+Container           : singularity - [UNTAR|DORADO_UNTAR:docker://liuyangzzu/nanome:v1.4, Tombo|DeepMod|METEORE:docker://liuyangzzu/nanome:v1.4, CLAIR3|CLAIR3_dorado:docker://hkubal/clair3:latest, DEEPSIGNAL2:docker://liuyangzzu/deepsignal2:v1.0, Guppy6|DORADO_CALL_EXTRACT:docker://liuyangzzu/guppy_stable:v6.3.8, DORADO_CALL|DORADO_DEMUX:docker://nanoporetech/dorado:sha268dcb4cd02093e75cdc58821f8b93719c4255ed, default:docker://liuyangzzu/nanome:v2.0.6]
+errorStrategy       : ignore
+maxRetries          : 5
+=================================
+executor >  local (5)
+[85/34b1db] ENVCHECK (hg002)               | 1 of 1 ✔
+[fa/f6bd20] DORADO_QC (hg002)              | 1 of 1 ✔
+[81/4fb6a1] DORADO_CALL_EXTRACT (per_read) | 1 of 1 ✔
+[65/aa6471] UNIFY (all)                    | 1 of 1 ✔
+```
 
 
 ## Session 6: Long read final project software installation
