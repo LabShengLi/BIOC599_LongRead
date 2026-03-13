@@ -587,8 +587,106 @@ haplotag.tsv               log                        phased_merge_output.vcf.gz
 
 ![IGV Snapshot of MethPhase](https://raw.githubusercontent.com/LabShengLi/BIOC599_LongRead/tutorial/pic/igv_snapshot_methphase.png)
 
+## Session 5: Run the Nanome pipeline for phasing
 
-## Session 5: Long read final project software installation
+This section describes how to run the Nanome pipeline in phasing mode using Nextflow with the Singularity/Apptainer profile. The command below loads the required modules, prepares a clean run directory, sets the local Singularity cache, and launches the workflow for a Dorado-based BAM input against the hg38 reference.
+
+Example script
+```bash
+nextflow run $NanomeDir -resume \
+    -profile singularity \
+    --dsname hg002 \
+    --input /project2/rhie_131/bioc599/shared/long_read_nanome/in_bam \
+    --genome /project2/rhie_131/bioc599/shared/long_read_nanome/hg38 \
+    --phasing \
+    --dorado \
+    --cpu_processors 4 \
+    --singularity_cache ${NXF_SINGULARITY_CACHEDIR}
+```
+
+
+### Argument description
+
+- `module purge`  
+  Clears all previously loaded environment modules to avoid software conflicts.
+
+- `module load ver/2506 gcc/14.3.0 openjdk/21.0.7_6 nextflow/25.04.8`  
+  Loads the required software stack, including Java and Nextflow.
+
+- `module load apptainer`  
+  Loads Apptainer, which is used by the `singularity` execution profile.
+
+- `date`, `hostname`, `pwd`  
+  Print the current date, hostname, and working directory for logging and troubleshooting.
+
+- `set -ex`  
+  Enables strict shell execution.  
+  - `-e`: stop immediately if a command fails  
+  - `-x`: print each command before execution
+
+- `rm -rf /project2/rhie_131/bioc599/shared/long_read_nanome/run_nanome_cmd`  
+  Removes the previous run directory to start from a clean workspace.
+
+- `mkdir -p /project2/rhie_131/bioc599/shared/long_read_nanome/run_nanome_cmd`  
+  Creates the run directory.
+
+- `cd /project2/rhie_131/bioc599/shared/long_read_nanome/run_nanome_cmd`  
+  Changes into the run directory where the workflow will be executed.
+
+- `export NXF_SINGULARITY_CACHEDIR=/project2/rhie_131/bioc599/shared/long_read_nanome/local_singularity_cache`  
+  Defines the local cache directory for Singularity/Apptainer images used by Nextflow.
+
+- `nextflow run $NanomeDir`  
+  Runs the Nanome workflow located at the path stored in `$NanomeDir`.
+
+- `-resume`  
+  Reuses cached results from previous successful runs, which is helpful for restarting interrupted workflows.
+
+- `-profile singularity`  
+  Uses the `singularity` profile to run the workflow inside Apptainer/Singularity containers.
+
+- `--dsname hg002`  
+  Sets the dataset name to `hg002`. This name is typically used in output directories and output file prefixes.
+
+- `--input_bam`  
+  Indicates that the workflow input is BAM-based. This option should be kept only if the pipeline defines it as a boolean flag.
+
+- `--dorado`  
+  Indicates that the BAM input was generated from a Dorado-based workflow, or enables Dorado-specific processing depending on the pipeline implementation.
+
+- `--input /project2/rhie_131/bioc599/shared/long_read_nanome/in_bam`  
+  Specifies the input directory containing the BAM files.
+
+- `--genome /project2/rhie_131/bioc599/shared/long_read_nanome/hg38`  
+  Specifies the reference genome directory for hg38.
+
+- `--phasing`  
+  Enables the phasing branch of the Nanome pipeline.
+
+- `--cpu_processors 4`  
+  Sets the number of CPU processors to 4 for workflow steps that use this parameter.
+
+- `--singularity_cache ${NXF_SINGULARITY_CACHEDIR}`  
+  Passes the Singularity cache directory to the pipeline as a workflow parameter.
+
+### Notes
+
+- `NXF_SINGULARITY_CACHEDIR` is a Nextflow engine-level setting, while `--singularity_cache` is a pipeline-level parameter. In this example, both point to the same cache directory.
+
+- The combination `--input_bam --dorado` is valid only if both are defined as boolean flags in the workflow. If `--input_bam` expects a file path or other value, the command should be adjusted accordingly.
+
+- If the workflow reports errors such as `Process requirement exceeds available CPUs`, the local executor CPU limit may need to be increased in `nextflow.config`, for example:
+
+```groovy
+executor {
+    cpus = 8
+}
+```
+
+
+
+
+## Session 6: Long read final project software installation
 
 
 Verify Dorado:
