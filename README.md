@@ -610,17 +610,19 @@ rm -rf /project2/rhie_131/bioc599/shared/long_read_nanome/run_nanome_cmd
 mkdir -p /project2/rhie_131/bioc599/shared/long_read_nanome/run_nanome_cmd
 cd /project2/rhie_131/bioc599/shared/long_read_nanome/run_nanome_cmd
 
-nextflow run $NanomeDir -resume \
+export NXF_SINGULARITY_CACHEDIR=/project2/rhie_131/bioc599/shared/long_read_nanome/local_singularity_cache
+
+nextflow pull LabShengLi/nanome -r rev6
+
+nextflow run LabShengLi/nanome -r rev6 -resume\
     -profile singularity \
     --dsname hg002 \
+    --input_bam  --dorado \
     --input /project2/rhie_131/bioc599/shared/long_read_nanome/in_bam \
     --genome /project2/rhie_131/bioc599/shared/long_read_nanome/hg38 \
-    --phasing \
-    --dorado \
-    --cpu_processors 4 \
+    --phasing --cpu_processors 4 \
     --singularity_cache ${NXF_SINGULARITY_CACHEDIR}
 ```
-
 
 ### Argument description
 
