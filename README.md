@@ -757,6 +757,15 @@ executor >  local (5)
 [fa/f6bd20] DORADO_QC (hg002)              | 1 of 1 ✔
 [81/4fb6a1] DORADO_CALL_EXTRACT (per_read) | 1 of 1 ✔
 [65/aa6471] UNIFY (all)                    | 1 of 1 ✔
+[8e/775eb1] CLAIR3_dorado (hg002)                       | 1 of 1 ✔
+[78/949738] DORADO_CALL_EXTRACT_POST_HP1 (per_read_HP1) | 1 of 1 ✔
+[30/6264cd] DORADO_CALL_EXTRACT_POST_HP2 (per_read_HP2) | 1 of 1 ✔
+[8f/a659de] UNIFY_POST_HP1 (HP1)                        | 1 of 1 ✔
+[b1/f0c091] UNIFY_POST_HP2 (HP2)                        | 1 of 1 ✔
+Completed at: 13-Mar-2026 14:11:02
+Duration    : 22m 37s
+CPU hours   : 0.8
+Succeeded   : 9
 ```
 
 
