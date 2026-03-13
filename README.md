@@ -593,6 +593,23 @@ This section describes how to run the Nanome pipeline in phasing mode using Next
 
 Example script
 ```bash
+#!/bin/bash
+
+module purge
+module load ver/2506  gcc/14.3.0 openjdk/21.0.7_6 nextflow/25.04.8
+
+date
+hostname
+pwd
+
+module load apptainer
+
+set -ex
+
+rm -rf /project2/rhie_131/bioc599/shared/long_read_nanome/run_nanome_cmd
+mkdir -p /project2/rhie_131/bioc599/shared/long_read_nanome/run_nanome_cmd
+cd /project2/rhie_131/bioc599/shared/long_read_nanome/run_nanome_cmd
+
 nextflow run $NanomeDir -resume \
     -profile singularity \
     --dsname hg002 \
