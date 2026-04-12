@@ -591,10 +591,16 @@ haplotag.tsv               log                        phased_merge_output.vcf.gz
 
 This section describes how to run the Nanome pipeline in phasing mode using Nextflow with the Singularity/Apptainer profile. The command below loads the required modules, prepares a clean run directory, sets the local Singularity cache, and launches the workflow for a Dorado-based BAM input against the hg38 reference.
 
-Example script
-```bash
-#!/bin/bash
+Preparation script
+```
+## srun --pty -p main --time=02:00:00 -n 2 --mem 8GB bash
+salloc -p debug -c 4
 
+WDIR="/project2/rhie_131/bioc599/shared/long_read_nanome/run_nanome_cmd_${USER}"
+```
+
+Example script
+```
 module purge
 module load ver/2506  gcc/14.3.0 openjdk/21.0.7_6 nextflow/25.04.8
 
@@ -606,9 +612,9 @@ module load apptainer
 
 set -ex
 
-rm -rf /project2/rhie_131/bioc599/shared/long_read_nanome/run_nanome_cmd
-mkdir -p /project2/rhie_131/bioc599/shared/long_read_nanome/run_nanome_cmd
-cd /project2/rhie_131/bioc599/shared/long_read_nanome/run_nanome_cmd
+rm -rf $WDIR
+mkdir -p $WDIR
+cd $WDIR
 
 export NXF_SINGULARITY_CACHEDIR=/project2/rhie_131/bioc599/shared/long_read_nanome/local_singularity_cache
 
