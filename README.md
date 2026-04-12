@@ -610,8 +610,6 @@ pwd
 
 module load apptainer
 
-set -ex
-
 rm -rf $WDIR
 mkdir -p $WDIR
 cd $WDIR
