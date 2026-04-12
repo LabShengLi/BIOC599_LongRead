@@ -594,9 +594,9 @@ This section describes how to run the Nanome pipeline in phasing mode using Next
 Preparation script
 ```
 ## srun --pty -p main --time=02:00:00 -n 2 --mem 8GB bash
-salloc -p debug -c 4
+salloc -p debug -c 4 --mem=20G
 
-WDIR="/project2/rhie_131/bioc599/shared/long_read_nanome/run_nanome_cmd_${USER}"
+WDIR="/project2/rhie_131/bioc599/shared/long_read_nanome/homework/run_nanome_cmd_${USER}"
 ```
 
 Example script
