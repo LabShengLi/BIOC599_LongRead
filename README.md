@@ -127,6 +127,12 @@ Verify installation:
 ./nextflow  -v
 ```
 
+Module load methods:
+```
+module purge
+module load ver/2506  gcc/14.3.0 openjdk/21.0.7_6 nextflow/25.04.8
+```
+
 #### Run Nextflow pipeline for RNAseq analysis 
 
 RNA sequencing (RNA-seq) is a powerful technique used to analyze the transcriptome of a biological sample. It helps researchers understand gene expression levels, identify differentially expressed genes, detect novel transcripts, and study alternative splicing events.  
@@ -154,7 +160,7 @@ A popular, community-curated RNA-seq workflow is available through [nf-core](htt
 
 Verify `nf-core/rnaseq` pipelie:
 ```angular2html
-./nextflow run nf-core/rnaseq --help
+nextflow run nf-core/rnaseq --help
 ```
 
 Help document output:
@@ -188,7 +194,8 @@ Input/output options
 To check that everything is installed and working correctly, run the RNA-seq pipeline with a small built-in test dataset:
 
 ```angular2html
-./nextflow run nf-core/rnaseq \
+module load apptainer
+nextflow run nf-core/rnaseq \
     -profile test,singularity \
     --outdir rnaseq_output --max_cpus 1
 ```
