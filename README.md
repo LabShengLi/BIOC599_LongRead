@@ -26,7 +26,8 @@ salloc -p debug -c 4
 Create and enter into a directory for this session's work:
 
 ```angular2html
-wdir="/scratch1/$USER/BIOC599_Software"
+basedir="/project2/rhie_131/bioc599/shared/long_read_nanome/inclass_activity"
+wdir="$basedir/${USER}_results"
 mkdir -p $wdir
 cd $wdir
 pwd
