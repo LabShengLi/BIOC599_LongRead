@@ -250,7 +250,8 @@ salloc -p main -c 8 --mem 32GB --time=02:00:00
 
 We will install tools using Conda and Singularity. Firstly, create a folder for tool installation:
 ```
-wdir="/scratch1/$USER/BIOC599_LongRead"
+basedir="/project2/rhie_131/bioc599/shared/long_read_nanome/inclass_activity"
+wdir="$basedir/${USER}_results"
 mkdir -p $wdir
 cd $wdir
 pwd
@@ -265,15 +266,6 @@ module load apptainer
 mkdir -p tool
 singularity pull --dir tool/ docker://nanoporetech/dorado
 ```
-
-
-```
-module load apptainer
-
-mkdir -p tool
-singularity pull --dir tool/ docker://nanoporetech/dorado
-```
-
 
 #### Genetic Variant Call tool: Clair3
 Download the **Clair3** container for variant calling.
