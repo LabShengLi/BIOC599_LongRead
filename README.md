@@ -267,6 +267,13 @@ mkdir -p tool
 singularity pull --dir tool/ docker://nanoporetech/dorado
 ```
 
+```
+module load apptainer
+
+mkdir -p tool
+singularity pull --dir tool/ docker://ontresearch/modkit
+```
+
 #### Genetic Variant Call tool: Clair3
 Download the **Clair3** container for variant calling.
 
@@ -295,7 +302,7 @@ singularity exec  ${clair3_image} \
 
 Verify ModKit:
 ```
-modkit=/scratch1/yliu8962/BIOC599_LongRead/tool/modkit_latest.sif
+modkit=/project2/rhie_131/bioc599/shared/long_read_nanome/singularity/modkit_latest.sif
 singularity exec $modkit \
     modkit -V
 ```
@@ -371,7 +378,8 @@ singularity exec ${dorado_image} \
 
 Navigate to the working directory:
 ```
-wdir="/scratch1/$USER/BIOC599_LongRead"
+basedir="/project2/rhie_131/bioc599/shared/long_read_nanome/inclass_activity"
+wdir="$basedir/${USER}_results"
 mkdir -p $wdir
 cd $wdir
 pwd
@@ -410,7 +418,7 @@ dorado_model_dir="$wdir/tool/models"
 dorado_base_model="dna_r9.4.1_e8_fast@v3.4"
 dorado_meth_model="dna_r9.4.1_e8_fast@v3.4_5mCG@v0.1"
 
-export SINGULARITY_BIND="/project,/scratch1"
+export SINGULARITY_BIND="/project2"
 
 mkdir -p analysis/dorado_call
 
@@ -456,6 +464,19 @@ singularity exec $dorado_image \
     samtools fastq $inbam_fn | gzip > analysis/dorado_call/dorado_call.fastq.gz
 ```
 
+Summary BAM files using Dorado:
+```
+singularity exec $dorado_image \
+    dorado summary $inbam_fn | gzip -f > analysis/dorado_call/dorado_call_sequencing_summary.txt.gz
+```
+
+Example output:
+
+```
+filename	read_id	run_id	channel	mux	start_time	duration	template_start	template_duration	sequence_length_template	mean_qscore_template	barcode	alignment_genome	alignment_genome_start	alignment_genome_end	alignment_strand_start	alignment_strand_end	alignment_direction	alignment_length	alignment_num_aligned	alignment_num_correct	alignment_num_insertions	alignment_num_deletions	alignment_num_substitutions	alignment_mapq	alignment_strand_coverage	alignment_identity	alignment_accuracy	alignment_bed_hits
+nanopore_demo_data.pod5	c852c023-958b-482e-89b3-1069a2dd52da	098c8278671ebb3df841b55ae73e7b7ca551ae8f	239	239631.6	297.494	39631.8	297.351	120484	10.0182	unclassified	chr11	2626537	2749302	26	120484	+	125985	117238	113071	3220	5527	4167	60	0.999784	0.964457	0.897496	0
+nanopore_demo_data.pod5	85cf7c07-b4f3-4e14-817b-aefc31eaa130	067f8be7e5b4cac3170a36762e4878ba47eded20	112	12745.78	174.008	2745.8	173.986	72009	12.2644	unclassified	chr11	2631461	2704227	10	71995	-	73842	70909	69693	1076	1857	1216	60	0.999667	0.982851	0.943812	0
+```
 
 #### IGV visualization of methylation states in BAM file
 
