@@ -96,7 +96,7 @@ singularity exec docker://grycap/cowsay \
 Run `fastqc` using Singularity:
 ```angular2html
 export LC_ALL=C
-singularity exec -B /scratch1 docker://biocontainers/fastqc:v0.11.9_cv8 \
+singularity exec -B /project2 docker://biocontainers/fastqc:v0.11.9_cv8 \
     fastqc Sample1_R1.fastq.gz
 ```
 
@@ -131,7 +131,7 @@ Verify installation:
 Module load methods:
 ```
 module purge
-module load ver/2506  gcc/14.3.0 openjdk/21.0.7_6 nextflow/25.04.8
+module load ver/2506  gcc/14.3.0 openjdk/21.0.7_6 nextflow/25.04.8 apptainer
 ```
 
 #### Run Nextflow pipeline for RNAseq analysis 
