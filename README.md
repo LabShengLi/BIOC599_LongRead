@@ -281,14 +281,14 @@ Run these commands to check if the installed tools are working correctly.
 Verify Dorado:
 ```
 module load apptainer
-dorado_image=/scratch1/yliu8962/BIOC599_LongRead/tool/dorado_latest.sif
+dorado_image=/project2/rhie_131/bioc599/shared/long_read_nanome/singularity/dorado_latest.sif
 singularity exec ${dorado_image} \
     dorado -vv
 ```
 
 Verify Clair3:
 ```
-clair3_image=/scratch1/yliu8962/BIOC599_LongRead/tool/clair3_latest.sif
+clair3_image=/project2/rhie_131/bioc599/shared/long_read_nanome/singularity/clair3_latest.sif
 singularity exec  ${clair3_image} \
     run_clair3.sh --version
 ```
@@ -336,8 +336,8 @@ pod5_file="data/nanopore_demo_data.pod5"
 wget --no-check-certificate ${online_pod5_file}  -O ${pod5_file}
 
 # load genome reference
-cp /scratch1/yliu8962/shared/hg38_chr11_chr15.fa.fai data/
-cp /scratch1/yliu8962/shared/hg38_chr11_chr15.fa data/
+cp /project2/rhie_131/bioc599/shared/long_read_nanome/BIOC599_LongRead/data/hg38_chr11_chr15.fa.fai data/
+cp /project2/rhie_131/bioc599/shared/long_read_nanome/BIOC599_LongRead/data/hg38_chr11_chr15.fa data/
 
 ls data/
 ```
