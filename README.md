@@ -55,7 +55,7 @@ fastqc -v
 Test `fastqc` command on example data:
 ```angular2html
 # copy fastq data into current folder
-ln -s /scratch1/yliu8962/BIOC599_Software/Sample1_R1.fastq.gz .
+ln -s /project2/rhie_131/bioc599/shared/long_read_nanome/software_install/Sample1_R1.fastq.gz .
 
 # run fastqc
 fastqc Sample1_R1.fastq.gz
