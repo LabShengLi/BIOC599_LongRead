@@ -454,6 +454,13 @@ singularity exec $modkit \
 head analysis/dorado_call/calls_dorado_5mC.bed
 ```
 
+Output like below:
+```
+chr11	2626572	2626573	m	1	+	2626572	2626573	255,0,0	1	100.00	1	0	0	0	00	0
+chr11	2626659	2626660	m	1	+	2626659	2626660	255,0,0	1	0.00	0	1	0	0	00	0
+chr11	2627308	2627309	m	1	+	2627308	2627309	255,0,0	1	0.00	0	1	0	0	00	0
+chr11	2627392	2627393	m	1	+	2627392	2627393	255,0,0	1	100.00	1	0	0	0	00	0
+```
 
 Convert BAM file into FASTQ file using samtools:
 ```angular2html
@@ -510,7 +517,7 @@ phased_vcf_fn="${outdir}/phased_merge_output.vcf.gz"
 tsvFile="${outdir}/haplotag.tsv"
 haplotagBamFile="${outdir}/haplotag.bam"
 
-export SINGULARITY_BIND="/project,/scratch1"
+export SINGULARITY_BIND="/project2"
 
 mkdir -p $outdir
 singularity exec ${clair3_image} \
