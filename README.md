@@ -809,21 +809,21 @@ Succeeded   : 9
 Verify Dorado:
 ```
 module load apptainer
-dorado_image=/scratch1/yliu8962/BIOC599_LongRead/tool/dorado_latest.sif
+dorado_image=/project2/rhie_131/bioc599/shared/long_read_nanome/singularity/dorado_latest.sif
 singularity exec ${dorado_image} \
     dorado -vv
 ```
 
 Verify Clair3:
 ```
-clair3_image=/scratch1/yliu8962/BIOC599_LongRead/tool/clair3_latest.sif
+clair3_image=/project2/rhie_131/bioc599/shared/long_read_nanome/singularity/clair3_latest.sif
 singularity exec  ${clair3_image} \
     run_clair3.sh --version
 ```
 
 Verify ModKit:
 ```
-modkit=/scratch1/yliu8962/BIOC599_LongRead/tool/modkit_latest.sif
+modkit=/project2/rhie_131/bioc599/shared/long_read_nanome/singularity/modkit_latest.sif
 singularity exec $modkit \
     modkit -V
 ```
