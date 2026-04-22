@@ -807,6 +807,9 @@ CPU hours   : 0.8
 Succeeded   : 9
 ```
 
+### Reference
+
++ Liu, Yang, et al. "NANOME: A Nextflow pipeline for haplotype-aware allele-specific consensus DNA methylation detection by nanopore long-read sequencing." bioRxiv (2025). https://pmc.ncbi.nlm.nih.gov/articles/PMC12236756/
 
 ## Session 6: Long read final project software installation
 
