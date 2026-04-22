@@ -241,7 +241,7 @@ This command starts an interactive session on the cluster with multiple CPU core
 ```
 ## srun --pty -p gpu --time=02:00:00 -n 8 --mem 32GB --gres=gpu:v100:1 bash  
 ## srun --pty -p main --time=02:00:00 -n 8 --mem 32GB bash
-salloc -p main -c 8 --mem 32GB --time=02:00:00
+salloc -p debug -c 8 --mem 64GB --time=01:00:00
 ```
 
 **Note: You must enter into the `compute` (`interactive`) mode to load/run most of the software, instead of the `log` mode.**
@@ -264,8 +264,10 @@ Download the **Dorado** container from DockerHub using Singularity.
 module load apptainer
 
 mkdir -p tool
-singularity pull --dir tool/ docker://nanoporetech/dorado
+singularity pull -F --dir tool/ docker://nanoporetech/dorado
 ```
+
+Download the **Modkit** container from DockerHub using Singularity.
 
 ```
 module load apptainer
@@ -278,6 +280,9 @@ singularity pull --dir tool/ docker://ontresearch/modkit
 Download the **Clair3** container for variant calling.
 
 ```
+module load apptainer
+
+mkdir -p tool
 singularity pull --dir tool/ docker://hkubal/clair3
 ```
 -->
