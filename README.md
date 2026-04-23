@@ -256,7 +256,7 @@ mkdir -p $wdir
 cd $wdir
 pwd
 ```
-<!--
+
 #### Basecall and Methylation call tool: Dorado
 Download the **Dorado** container from DockerHub using Singularity.
 
@@ -285,7 +285,6 @@ module load apptainer
 mkdir -p tool
 singularity pull --dir tool/ docker://hkubal/clair3
 ```
--->
 
 #### Verify installation
 Run these commands to check if the installed tools are working correctly.
